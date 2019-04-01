@@ -27,12 +27,15 @@
 <script src="<?php echo base_url('assets/js/jquery-ui.min.js');?>"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script src="<?php echo base_url('assets/js/jquery.form-validator.min.js');?>"></script>
+<!-- Include jQuery Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
   
 </script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
+
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/js/app.min.js');?>"></script>
 <!-- iCheck -->
