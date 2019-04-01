@@ -110,14 +110,13 @@ class User extends CI_Controller {
                 $body = $body->html;
                 foreach ($data as $key => $value) {
                     $body = str_replace('{var_'.$key.'}', $value, $body);
-                }
-                
+                }               
                 $config = Array(        
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://apps.olmatix.com',
-                    'smtp_port' => 465,
-                    'smtp_user' => 'pami@olmatix.xyz',
-                    'smtp_pass' => 'Aprilm0p',
+                    'protocol' => $setting['mail_setting'],
+                    'smtp_host' => $setting['HOST'],
+                    'smtp_port' => $setting['SMTP_SECURE'],
+                    'smtp_user' => $setting['SMTP_EMAIL'],
+                    'smtp_pass' => $setting['SMTP_PASSWORD'],
                     'smtp_timeout' => '4',
                     'mailtype'  => 'html', 
                     'charset'   => 'iso-8859-1'
@@ -127,19 +126,20 @@ class User extends CI_Controller {
                 $this->email->set_newline("\r\n");
 
                 $this->email->to($email_address);
-                $this->email->from('pami@olmatix.xyz','PAMI Web Admin');
+                $this->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
                 $this->email->subject('Password Reset Notification');
 
                 $this->email->message($body);  
                 $this->email->set_mailtype('html'); 
+            
                 if ($this->email->send()) {
                      $this->session->set_flashdata('messagePr', 'To reset your password, link has been sent to your email <b>'.$email_address.'</b> if you dont see in your inbox please check on junk/spam folder');
-                    redirect( base_url().'user/login','refresh');
+                     redirect( base_url().'user/login','refresh');
                 } else { 
-                    $this->session->set_flashdata("messagePr","You have encountered an error ".$this->email->print_debugger());
-                    redirect( base_url().'user/login','refresh');
+                     $this->session->set_flashdata("messagePr","You have encountered an error ".$this->email->print_debugger());
+                     redirect( base_url().'user/login','refresh');
                 }
-   
+                
             } else {    
                 $this->session->set_flashdata('forgotpassword', 'This account does not exist');//die;
                 redirect( base_url()."user/forgetpassword");
@@ -267,6 +267,10 @@ class User extends CI_Controller {
         }
         $data['reg_stat']   = $this->User_model->get_registration_status('ALL');
         $data['user_data']  = $this->User_model->get_users($id);
+        $reg_stat = $this->User_model->get_registration_status($id);
+        if ($reg_stat->num_rows() > 0) {
+            $data['registrasi_info'] = 'Anda sudah melakukan registrasi rekening, saat ini sedang dalam proses verifikasi';
+        }
         $this->load->view('include/header'); 
         $this->load->view('profile', $data);
         $this->load->view('include/footer');
@@ -484,7 +488,7 @@ class User extends CI_Controller {
             $result['seccessCount'] = 0;
             $result['invalidEmailCount'] = 0;
             $result['noTemplate'] = 0;
-    		if(isset($body->html) && $body->html != '') {
+            if(isset($body->html) && $body->html != '') {
                 $body = $body->html;
 	    		foreach ($emailArray as $mailKey => $mailValue) {
 	    			if(filter_var($mailValue, FILTER_VALIDATE_EMAIL)) {
@@ -496,26 +500,45 @@ class User extends CI_Controller {
     				          $body = str_replace('{'.$key.'}', $value, $body);
     				        }
                             
-                            $emm = sendMail('Invitation for registration', $mailValue, $body, '');
+                            $config = Array(        
+                                'protocol' => $setting['mail_setting'],
+                                'smtp_host' => $setting['HOST'],
+                                'smtp_port' => $setting['SMTP_SECURE'],
+                                'smtp_user' => $setting['SMTP_EMAIL'],
+                                'smtp_pass' => $setting['SMTP_PASSWORD'],
+                                'smtp_timeout' => '4',
+                                'mailtype'  => 'html', 
+                                'charset'   => 'iso-8859-1'
+                            );
+            
+                            $this->load->library('email', $config);
+                            $this->email->set_newline("\r\n");
+            
+                            $this->email->to($mailValue);
+                            $this->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
+                            $this->email->subject('Invitation to Register');
+            
+                            $this->email->message($body);  
+                            $this->email->set_mailtype('html'); 
 
-			    			if($emm) {
+			    			if($this->email->send()) {
 			    				$darr = array('email' => $mailValue, 'var_key' => $var_key);
 			    				$this->User_model->insertRow('users', $darr);
-			    				$result['seccessCount'] += 1;;
+			    				$result['seccessCount'] += 1;
 			    			}
-	    				} else {
-	    					$result['existCount'] += 1;
-	    				}
-	    			} else {
-	    				$result['invalidEmailCount'] += 1;
-	    			}
-	    		}
-    		} else {
-    			$result['noTemplate'] = 'No Email Template Availabale.';
+                            } else {
+                                $result['existCount'] += 1;
+                            }
+                        } else {
+                            $result['invalidEmailCount'] += 1;
+                        }
+                    }
+                } else {
+                    $result['noTemplate'] = 'No Email Template Availabale.';
     		}
     	}
     	echo json_encode($result);
-    	exit;
+        exit;
     }
 
     /**
@@ -669,7 +692,10 @@ class User extends CI_Controller {
     // save account
     public function insert_account()
     {
+        $setting = settings();
         $userid = $this->session->userdata('user_details')[0]->users_id;
+        $username = $this->session->userdata('user_details')[0]->name;
+        $email_address = $this->session->userdata('user_details')[0]->email;
         $reg_stat = $this->User_model->get_registration_status($userid);
         if ($reg_stat->num_rows() > 0) {
             $this->session->set_flashdata('messagePr', 'Anda sudah melakukan registrasi, saat ini sedang dalam proses verifikasi');
@@ -709,6 +735,42 @@ class User extends CI_Controller {
             );
 
             $this->User_model->insertRow('user_account_info', $data);
+
+            $body = $this->User_model->get_template('member_info');
+            $data = array(
+                'user_name' => $username,
+                'e_ktp' => $this->input->post('id_number'),
+                'ttl' => $dob_date.'-'.$dob_month.'-'.$dob_years,
+                'alamat' => $this->input->post('ktp_address'),
+                'sender_name' => $setting['company_name'],
+                'website_name' => $setting['company_name']
+                );
+            $body = $body->html;
+            foreach ($data as $key => $value) {
+                $body = str_replace('{var_'.$key.'}', $value, $body);
+            } 
+
+            $config = Array(        
+                'protocol' => $setting['mail_setting'],
+                'smtp_host' => $setting['HOST'],
+                'smtp_port' => $setting['SMTP_SECURE'],
+                'smtp_user' => $setting['SMTP_EMAIL'],
+                'smtp_pass' => $setting['SMTP_PASSWORD'],
+                'smtp_timeout' => '4',
+                'mailtype'  => 'html', 
+                'charset'   => 'iso-8859-1'
+            );
+
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+
+            $this->email->to($email_address);
+            $this->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
+            $this->email->subject('Informasi Pembukaan Rekening');
+
+            $this->email->message($body);  
+            $this->email->set_mailtype('html'); 
+            $this->email->send();
         }
     }
 
