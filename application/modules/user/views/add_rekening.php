@@ -737,8 +737,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<label class="kyc-input-label">Pekerjaan</label>
-										<select id="occupation" name="occupation" class="mandatory form-control kyc-input-select">
-
+										<select id="occupation" name="occupation" class="form-control select2" style="width: 100%;">
 											<option value="">Pilih Pekerjaan</option>
 											<option value="10" id="occupation_10">Aparatur Sipil Negara</option>
 											<option value="11" id="occupation_11">BUMN/BUMD</option>
@@ -765,8 +764,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<label class="kyc-input-label">Penghasilan Kotor/Tahun</label>
-										<select id="gross_income" name="gross_income" class="mandatory form-control kyc-input-select">
-
+										<select id="gross_income" name="gross_income" class="form-control select2" style="width: 100%;">
 											<option value="">Pilih Penghasilan Kotor</option>
 											<option value="1" id="gross_income_1">&lt; 10 juta / tahun</option>
 											<option value="2" id="gross_income_2">&gt; 10 – 50 juta / tahun</option>
@@ -781,8 +779,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<label class="kyc-input-label">Sumber Dana</label>
-										<select id="source_of_fund" name="source_of_fund" class="form-control kyc-input-select">
-
+										<select id="source_of_fund" name="source_of_fund" class="form-control select2" style="width: 100%;">
 											<option value="">Pilih Sumber Dana</option>
 											<option value="3" id="source_of_fund_3">Bunga Tabungan</option>
 											<option value="5" id="source_of_fund_5">Dana dari orang tua atau anak</option>
