@@ -166,9 +166,14 @@
                 <li class="<?=($this->router->method==="portfolio")?"active":"not-active"?> treeview"> 
                 <a href="<?php echo base_url('user/portfolio');?>"> <i class="fa fa-history"></i> <span>Portofolio</span></a>
                 </li>  
-                <li class="<?=($this->router->method==="rekening")?"active":"not-active"?>"> 
-                <a href="<?php echo base_url('user/registrasi');?>"> <i class="fa fa-credit-card"></i> <span>Registrasi Rekening</span></a>
-                </li>    
+                <?php  $reg_stat = $this->User_model->get_registration_status($this->session->userdata('user_details')[0]->users_id);
+                if ($reg_stat->num_rows() === 0) { ?>
+                  <li class="<?=($this->router->method==="rekening")?"active":"not-active"?>"> 
+                  <a href="<?php echo base_url('user/registrasi');?>"> <i class="fa fa-credit-card"></i> <span>Registrasi Rekening</span></a>
+                  </li>  
+                  <?php } ?>
+                  
+
                <?php } ?>
                <?php if(CheckPermission("user", "own_read")){ ?>
                     <li class="<?=($this->router->method==="userTable")?"active":"not-active"?>"> 
