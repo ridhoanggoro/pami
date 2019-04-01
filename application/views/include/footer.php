@@ -26,10 +26,14 @@
 
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.form-validator.min.js');?>"></script>
 
+<script src="<?php echo base_url('assets/js/jquery.form-validator.min.js');?>"></script>
+<!-- Include jQuery Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <!-- Include SmartWizard JavaScript source -->
 <script src="<?php echo base_url('assets/js/jquery.smartWizard.min.js');?>"></script>
+<!-- Dropzone 5.4.0 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js' type='text/javascript'></script>
 
 <!-- Select2 -->
 <script src="<?php echo base_url('assets/vendor/select2/dist/js/select2.full.min.js');?>"></script>
@@ -38,7 +42,10 @@
 <script src="<?php echo base_url('assets/js/jquery.slimscroll.min.js');?>"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url('assets/js/fastclick.js');?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
+<!-- Sweet Alert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/js/app.min.js');?>"></script>
 <!-- iCheck -->
@@ -57,6 +64,9 @@
 <script src="<?php echo base_url('assets/js/demo.js');?>"></script>
 <script src="<?php echo base_url('assets/js/dashboard.js');?>"></script>
 <script src="<?php echo base_url('assets/js/custom.js');?>"></script>
+
+<!-- Signature pad -->
+<script src="<?php echo base_url('assets/js/Sketch.js');?>"></script>
 <script>
 	function validate_fileType(fileName,Nameid,arrayValu)
 	{
