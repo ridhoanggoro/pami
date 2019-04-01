@@ -313,35 +313,33 @@
 	  	return $qr->result();
 		}
 		
-		function sendMail($subject, $recipient, $body, $attachment)
+		function sendEmail($subject, $recipient, $body, $attachment)
 		{
 			$CI = get_instance();
 			$setting = settings();
 			$config = Array(        
 				'protocol' => $setting['mail_setting'],
 				'smtp_host' => $setting['HOST'],
-				'smtp_port' => $setting['PORT'],
+				'smtp_port' => $setting['SMTP_SECURE'],
 				'smtp_user' => $setting['SMTP_EMAIL'],
 				'smtp_pass' => $setting['SMTP_PASSWORD'],
 				'smtp_timeout' => '4',
 				'mailtype'  => 'html', 
 				'charset'   => 'iso-8859-1'
-			);
+				);
 
 			$CI->load->library('email', $config);
 			$CI->email->set_newline("\r\n");
 
-			$CI->email->to($email_address);
+			$CI->email->to($recipient);
 			$CI->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
 			$CI->email->subject($subject);
 
 			$CI->email->message($body);  
 			$CI->email->set_mailtype('html'); 
 
-			if ($CI->email->send()) {
-				return true;
-			} else { return $CI->email->print_debugger(); }
-			 
+			$CI->email->send();			
+			
 		}
 
 /*	  function geneeratePdf($module, $mid, $tid) {
