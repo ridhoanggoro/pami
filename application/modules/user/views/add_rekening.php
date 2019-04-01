@@ -1082,7 +1082,12 @@
                             data:dataString,
                             success:function (data) {
                                 //var foto = $("#signatureDone").val();
-                                alert('Terima kasih data anda telah berhasil di proses, mohon cek email anda untuk update status registrasi anda');
+                                //alert('Terima kasih data anda telah berhasil di proses, mohon cek email anda untuk update status registrasi anda');
+                                swal({
+                                        title:  "Berhasil!",
+                                        text:   "Terima kasih data anda telah berhasil di proses, mohon cek email anda untuk update status registrasi anda",
+                                        icon:   "success",
+                                    });
                                 //alert(foto);
                                 },
                              error: function() {
