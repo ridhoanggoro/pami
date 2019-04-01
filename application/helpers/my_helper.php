@@ -311,7 +311,21 @@
 	  	$CI->db->where('module', $module);
 	  	$qr = $CI->db->get();
 	  	return $qr->result();
-	  }
+		}
+		
+		function sendMail()
+		{
+			$config = Array(        
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://ratnik.uapict.com',
+				'smtp_port' => 465,
+				'smtp_user' => 'notifikasi@olmatix.id',
+				'smtp_pass' => 'Aprilm0p',
+				'smtp_timeout' => '4',
+				'mailtype'  => 'html', 
+				'charset'   => 'iso-8859-1'
+			);
+		}
 
 /*	  function geneeratePdf($module, $mid, $tid) {
 	  	$CI = get_instance();
