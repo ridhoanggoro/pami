@@ -338,7 +338,10 @@
 			$CI->email->message($body);  
 			$CI->email->set_mailtype('html'); 
 
-			return $CI->email->send();
+			if ($CI->email->send()) {
+				return true;
+			} else { return $CI->email->print_debugger(); }
+			 
 		}
 
 /*	  function geneeratePdf($module, $mid, $tid) {
