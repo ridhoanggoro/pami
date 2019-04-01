@@ -1082,13 +1082,20 @@
                             data:dataString,
                             success:function (data) {
                                 //var foto = $("#signatureDone").val();
-                                //alert('Terima kasih data anda telah berhasil di proses, mohon cek email anda untuk update status registrasi anda');
                                 swal({
                                         title:  "Berhasil!",
                                         text:   "Terima kasih data anda telah berhasil di proses, mohon cek email anda untuk update status registrasi anda",
                                         icon:   "success",
-                                    });
-                                //alert(foto);
+									});
+									var seconds = 3;
+									setInterval(function () {
+									seconds--;
+									$("#lblCount").html(seconds);
+									if (seconds == 0) {
+											$("#dvCountDown").hide();
+											window.location = "<?php echo base_url(); ?>user/profile";
+										}
+									}, 1000);
                                 },
                              error: function() {
                                     alert('Error occured');
