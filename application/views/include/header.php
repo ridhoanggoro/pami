@@ -14,6 +14,7 @@
 
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -24,7 +25,10 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/css/smart_wizard.css');?>">
   <!-- Optional SmartWizard theme -->
   <link rel="stylesheet" href="<?php echo base_url('assets/css/smart_wizard_theme_arrows.css');?>">
-  
+  <!-- Dropzone Upload -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.css' type='text/css' rel='stylesheet'>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/vendor/select2/dist/css/select2.min.css');?>">
   <!-- Theme style -->
@@ -73,8 +77,51 @@
                         <!-- <li>
                           <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                         </li> -->
-                        <!-- User Account: style can be found in dropdown.less -->          
+                        <!-- User Account: style can be found in dropdown.less -->  
+                        <?php if($this->session->userdata('user_details')[0]->user_type == 'admin' || $this->session->userdata('user_details')[0]->user_type == 'Manager'){ ?>         
+                        <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          <i class="fa fa-envelope-o"></i>
+                          <span class="label label-info"><?php echo '10'; ?></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li class="header">You have 10 notifications</li>
+                          <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                  page and may cause design problems
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-users text-red"></i> 5 new members joined
+                                </a>
+                              </li>
 
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-user text-red"></i> You changed your username
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="footer"><a href="#">View all</a></li>
+                        </ul>
+                        </li>
+                        <?php } ?>
                         <li class="dropdown user user-menu">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                <?php 
@@ -106,7 +153,10 @@
                 <?php //echo '<pre>';print_r($this->router); die; ?>
                 <li class="<?=($this->router->method==="profile")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('user/profile');?>"> <i class="fa fa-desktop"></i><span>My Account</span></a>
-                </li>
+                </li>        
+                <?php $this->load->view("include/menu");?> 
+                
+                <?php if(isset($this->session->userdata('user_details')[0]->user_type) && $this->session->userdata('user_details')[0]->user_type == 'Member'){ ?>
                 <li class="<?=($this->router->method==="overview")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('user/overview');?>"> <i class="fa fa-line-chart"></i> <span>Overview</span></a>
                 </li> 
@@ -118,10 +168,8 @@
                 </li>  
                 <li class="<?=($this->router->method==="rekening")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('user/registrasi');?>"> <i class="fa fa-credit-card"></i> <span>Registrasi Rekening</span></a>
-                </li>            
-                <?php $this->load->view("include/menu");?> 
-                
-               
+                </li>    
+               <?php } ?>
                <?php if(CheckPermission("user", "own_read")){ ?>
                     <li class="<?=($this->router->method==="userTable")?"active":"not-active"?>"> 
                         <a href="<?php echo base_url();?>user/userTable"> <i class="fa fa-users"></i> <span>Users</span></a>
@@ -133,6 +181,9 @@
 					          <li class="<?=($this->router->class==="product")?"active":"not-active"?>">
                         <a href="<?php echo base_url("product"); ?>"><i class="fa fa-book"></i><span>Product</span></a>
                     </li>
+                    <li class="<?=($this->router->class==="new_registered_member")?"active":"not-active"?>">
+                        <a href="<?php echo base_url("user/registered_list"); ?>"><i class="fa fa-user-plus"></i><span>Member Register List</span></a>
+                    </li>
                     <!-- <li class="<?php //echo ($this->router->class==="Templates")?"active":"not-active"?>">
                         <a href="<?php //echo base_url("Templates"); ?>"><i class="fa fa-cubes"></i> <span>Templates</span></a>
                     </li> -->
@@ -140,14 +191,15 @@
                     <li class="<?=($this->router->class==="invoice")?"active":"not-active"?>">
                         <a href="<?php echo base_url("invoice/view"); ?>"><i class="fa fa-list-alt"></i> <span>Invoice</span></a>
                     </li>
-
                <?php  }*/ ?>
-					
+               <?php  if(isset($this->session->userdata('user_details')[0]->user_type) && $this->session->userdata('user_details')[0]->user_type == 'Manager'){ ?>
+                  <li class="<?=($this->router->class==="new_registered_member")?"active":"not-active"?>">
+                      <a href="<?php echo base_url("user/registered_list"); ?>"><i class="fa fa-user-plus"></i><span>Member Register List</span></a>
+                  </li>
+                    <?php } ?>
                   <li class="<?=($this->router->class==="about")?"active":"not-active"?>">
-                        <a href="<?php echo base_url("about"); ?>"><i class="fa fa-info-circle"></i> <span>About Us</span></a>
-                    </li>
-
-
+                      <a href="<?php echo base_url("about"); ?>"><i class="fa fa-info-circle"></i> <span>About Us</span></a>
+                  </li>
               </ul>
             </section>
             <!-- /.sidebar -->
