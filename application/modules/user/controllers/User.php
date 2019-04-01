@@ -114,9 +114,9 @@ class User extends CI_Controller {
                 
                 $config = Array(        
                     'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://ratnik.uapict.com',
+                    'smtp_host' => 'ssl://apps.olmatix.com',
                     'smtp_port' => 465,
-                    'smtp_user' => 'notifikasi@olmatix.id',
+                    'smtp_user' => 'pami@olmatix.xyz',
                     'smtp_pass' => 'Aprilm0p',
                     'smtp_timeout' => '4',
                     'mailtype'  => 'html', 
@@ -127,7 +127,7 @@ class User extends CI_Controller {
                 $this->email->set_newline("\r\n");
 
                 $this->email->to($email_address);
-                $this->email->from('notifikasi@olmatix.id','PAMI Web Admin');
+                $this->email->from('pami@olmatix.xyz','PAMI Web Admin');
                 $this->email->subject('Password Reset Notification');
 
                 $this->email->message($body);  
@@ -495,16 +495,9 @@ class User extends CI_Controller {
     				        foreach ($data as $key => $value) {
     				          $body = str_replace('{'.$key.'}', $value, $body);
     				        }
-                            if($setting['mail_setting'] == 'php_mailer') {
-                                $this->load->library("send_mail");
-    			    			$emm = $this->send_mail->email('Invitation for registration', $body, $mailValue, $setting);
-                            } else {
-                                // content-type is required when sending HTML email
-                                $headers = "MIME-Version: 1.0" . "\r\n";
-                                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                                $headers .= 'From: '.$setting['EMAIL'] . "\r\n";
-                                $emm = mail($mailValue,'Invitation for registration',$body,$headers);
-                            }
+                            
+                            $emm = sendMail('Invitation for registration', $mailValue, $body, '');
+
 			    			if($emm) {
 			    				$darr = array('email' => $mailValue, 'var_key' => $var_key);
 			    				$this->User_model->insertRow('users', $darr);
