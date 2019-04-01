@@ -114,9 +114,9 @@ class User extends CI_Controller {
                 
                 $config = Array(        
                     'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://apps.olmatix.com',
+                    'smtp_host' => 'ssl://ratnik.uapict.com',
                     'smtp_port' => 465,
-                    'smtp_user' => 'pami@olmatix.xyz',
+                    'smtp_user' => 'notifikasi@olmatix.id',
                     'smtp_pass' => 'Aprilm0p',
                     'smtp_timeout' => '4',
                     'mailtype'  => 'html', 
@@ -127,7 +127,7 @@ class User extends CI_Controller {
                 $this->email->set_newline("\r\n");
 
                 $this->email->to($email_address);
-                $this->email->from('pami@olmatix.xyz','PAMI Web Admin');
+                $this->email->from('notifikasi@olmatix.id','PAMI Web Admin');
                 $this->email->subject('Password Reset Notification');
 
                 $this->email->message($body);  
