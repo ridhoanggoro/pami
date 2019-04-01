@@ -801,7 +801,46 @@ class User extends CI_Controller {
     }
 
     public function approve_update(){
+
         $data = $this->User_model->update_registration_status();
+
+        $setting = settings();
+        $body = $this->User_model->get_template('approve_reject');
+        $data = array(
+            'user_name' => $username,
+            'e_ktp' => $this->input->post('id_number'),
+            'ttl' => $dob_date.'-'.$dob_month.'-'.$dob_years,
+            'alamat' => $this->input->post('ktp_address'),
+            'sender_name' => $setting['company_name'],
+            'website_name' => $setting['company_name']
+            );
+        $body = $body->html;
+        foreach ($data as $key => $value) {
+            $body = str_replace('{var_'.$key.'}', $value, $body);
+        } 
+
+        $config = Array(        
+            'protocol' => $setting['mail_setting'],
+            'smtp_host' => $setting['HOST'],
+            'smtp_port' => $setting['SMTP_SECURE'],
+            'smtp_user' => $setting['SMTP_EMAIL'],
+            'smtp_pass' => $setting['SMTP_PASSWORD'],
+            'smtp_timeout' => '4',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+        );
+
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        $this->email->to($email_address);
+        $this->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
+        $this->email->subject('Informasi Pembukaan Rekening');
+
+        $this->email->message($body);  
+        $this->email->set_mailtype('html'); 
+        $this->email->send();
+
         echo json_encode($data);
     }
 }
