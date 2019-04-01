@@ -313,18 +313,32 @@
 	  	return $qr->result();
 		}
 		
-		function sendMail()
+		function sendMail($subject, $recipient, $body, $attachment)
 		{
+			$CI = get_instance();
+			$setting = settings();
 			$config = Array(        
-				'protocol' => 'smtp',
-				'smtp_host' => 'ssl://ratnik.uapict.com',
-				'smtp_port' => 465,
-				'smtp_user' => 'notifikasi@olmatix.id',
-				'smtp_pass' => 'Aprilm0p',
+				'protocol' => $setting['mail_setting'],
+				'smtp_host' => $setting['HOST'],
+				'smtp_port' => $setting['PORT'],
+				'smtp_user' => $setting['SMTP_EMAIL'],
+				'smtp_pass' => $setting['SMTP_PASSWORD'],
 				'smtp_timeout' => '4',
 				'mailtype'  => 'html', 
 				'charset'   => 'iso-8859-1'
 			);
+
+			$CI->load->library('email', $config);
+			$CI->email->set_newline("\r\n");
+
+			$CI->email->to($email_address);
+			$CI->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
+			$CI->email->subject($subject);
+
+			$CI->email->message($body);  
+			$CI->email->set_mailtype('html'); 
+
+			return $CI->email->send();
 		}
 
 /*	  function geneeratePdf($module, $mid, $tid) {
