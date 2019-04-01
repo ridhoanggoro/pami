@@ -97,7 +97,7 @@ class User extends CI_Controller {
                 $var_key = $this->getVarificationCode(); 
                 $this->User_model->updateRow('users', 'users_id', $res[0]->users_id, array('var_key' => $var_key));
                 $sub = "Reset password";
-                $email = $this->input->post('email');      
+                $email_address = $this->input->post('email');      
                 $data = array(
                     'user_name' => $res[0]->name,
                     'action_url' =>base_url(),
@@ -111,20 +111,35 @@ class User extends CI_Controller {
                 foreach ($data as $key => $value) {
                     $body = str_replace('{var_'.$key.'}', $value, $body);
                 }
-                if($setting['mail_setting'] == 'php_mailer') {
-                    $this->load->library("send_mail");         
-                    $emm = $this->send_mail->email($sub, $body, $email, $setting);
-                } else {
-                    // content-type is required when sending HTML email
-                    $headers = "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $headers .= 'From: '.$setting['EMAIL'] . "\r\n";
-                    $emm = mail($email,$sub,$body,$headers);
-                }
-                if($emm) {
-                    $this->session->set_flashdata('messagePr', 'To reset your password, link has been sent to your email');
+                
+                $config = Array(        
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://apps.olmatix.com',
+                    'smtp_port' => 465,
+                    'smtp_user' => 'pami@olmatix.xyz',
+                    'smtp_pass' => 'Aprilm0p',
+                    'smtp_timeout' => '4',
+                    'mailtype'  => 'html', 
+                    'charset'   => 'iso-8859-1'
+                );
+
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
+
+                $this->email->to($email_address);
+                $this->email->from('pami@olmatix.xyz','PAMI Web Admin');
+                $this->email->subject('Password Reset Notification');
+
+                $this->email->message($body);  
+                $this->email->set_mailtype('html'); 
+                if ($this->email->send()) {
+                     $this->session->set_flashdata('messagePr', 'To reset your password, link has been sent to your email <b>'.$email_address.'</b> if you dont see in your inbox please check on junk/spam folder');
+                    redirect( base_url().'user/login','refresh');
+                } else { 
+                    $this->session->set_flashdata("messagePr","You have encountered an error ".$this->email->print_debugger());
                     redirect( base_url().'user/login','refresh');
                 }
+   
             } else {    
                 $this->session->set_flashdata('forgotpassword', 'This account does not exist');//die;
                 redirect( base_url()."user/forgetpassword");
@@ -250,7 +265,8 @@ class User extends CI_Controller {
         if(!isset($id) || $id == '') {
             $id = $this->session->userdata ('user_details')[0]->users_id;
         }
-        $data['user_data'] = $this->User_model->get_users($id);
+        $data['reg_stat']   = $this->User_model->get_registration_status('ALL');
+        $data['user_data']  = $this->User_model->get_users($id);
         $this->load->view('include/header'); 
         $this->load->view('profile', $data);
         $this->load->view('include/footer');
@@ -618,5 +634,119 @@ class User extends CI_Controller {
         $this->load->view('include/header'); 
         $this->load->view('add_rekening', $data);
         $this->load->view('include/footer');
+    }
+
+    //Untuk proses upload foto
+    public function proses_upload(){
+
+        $config['upload_path']   = FCPATH.'/upload-foto/';
+        $config['allowed_types'] = 'gif|jpg|png|ico';
+        $this->load->library('upload',$config);
+
+        if($this->upload->do_upload('userfile'))
+        {
+            $upload_data        = $this->upload->data();
+            $token              = $this->input->post('token_foto');
+            $nama_file          = $this->upload->data('file_name');
+            
+            $this->db->insert('file_upload',array('nama_file'=>$nama_file ,'unique_id'=>$token));
+        }
+    }
+
+    //Untuk menghapus foto
+    public function remove_foto(){
+
+        //Ambil token foto
+        $token=$this->input->post('token');
+        
+        $foto=$this->db->get_where('foto',array('token'=>$token));
+
+        if($foto->num_rows()>0){
+            $hasil=$foto->row();
+            $nama_foto=$hasil->nama_foto;
+            if(file_exists($file=FCPATH.'/upload-foto/'.$nama_foto)){
+                unlink($file);
+            }
+            // $this->db->delete('foto',array('token'=>$token));
+
+        }
+        echo "{}";
+    }
+
+    // save account
+    public function insert_account()
+    {
+        $userid = $this->session->userdata('user_details')[0]->users_id;
+        $reg_stat = $this->User_model->get_registration_status($userid);
+        if ($reg_stat->num_rows() > 0) {
+            $this->session->set_flashdata('messagePr', 'Anda sudah melakukan registrasi, saat ini sedang dalam proses verifikasi');
+            redirect( base_url().'user/registrasi', 'refresh');
+        }
+        else { 
+            $dob_date   = $this->input->post('dob-date');
+            $dob_month = $this->input->post('dob-month');
+            $dob_years = $this->input->post('dob-year');
+
+            $dob = $dob_years.'-'.$dob_month.'-'.$dob_date;
+
+            $doc_id = $this->input->post('foto');
+            $e_ktp_foto = $this->User_model->get_doc_filename($doc_id);
+
+            $data = array(
+                'users_id'              => $userid,
+                'e_ktp_no'              => $this->input->post('id_number'),
+                'e_ktp_foto'            => $e_ktp_foto,
+                'tempat_lahir'          => $this->input->post('place_of_birth'),
+                'tanggal_lahir'         => $dob,
+                'jenis_kelamin'         => $this->input->post('kelamin'), 
+                'status_kawin'          => $this->input->post('marital_status'),
+                'pendidikan_terakhir'   => $this->input->post('education'),
+                'agama'                 => $this->input->post('religion'),
+                'no_hp'                 => $this->input->post('mobile_phone_number'),
+                'pekerjaan'             => $this->input->post('occupation'),
+                'penghasilan_per_tahun' => $this->input->post('gross_income'),
+                'sumber_dana'           => $this->input->post('source_of_fund'),
+                'alamat'                => $this->input->post('ktp_address'),
+                'kota'                  => $this->input->post('ktp_city'),
+                'kode_pos'              => $this->input->post('ktp_postal_code'),
+                'rekening_bank_code'    => $this->input->post('bank_code'),
+                'rekening_bank_no'      => $this->input->post('account_number'),
+                'ttd'                   => $this->input->post('signatureDone'),
+                'account_status'        => 0,
+            );
+
+            $this->User_model->insertRow('user_account_info', $data);
+        }
+    }
+
+     /**
+     * This function is Showing new users registered
+     * @return Void
+     */
+    public function registered_list($id='') {   
+        is_login();
+        if(!isset($id) || $id == '') {
+            $id = $this->session->userdata ('user_details')[0]->users_id;
+        }
+        $reg_count          = $this->User_model->get_registration_status('ALL');
+        $data['reg_stat']   = $reg_count->num_rows();
+        $data['user_data']  = $this->User_model->get_users($id);
+        $this->load->view('include/header'); 
+        $this->load->view('member_register_list', $data);
+        $this->load->view('include/footer');
+    }
+
+    /**
+     * This function is to get raw data new users registered
+     * @return Void
+     */
+    public function get_acc_registered_list(){
+        $data = $this->User_model->get_registration_status('ALL');
+        echo json_encode($data->result());
+    }
+
+    public function approve_update(){
+        $data = $this->User_model->update_registration_status();
+        echo json_encode($data);
     }
 }
