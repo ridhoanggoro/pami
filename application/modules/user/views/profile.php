@@ -5,6 +5,12 @@
   <?php if($this->session->flashdata("messagePr")){?>
     <div class="alert alert-info">      
       <?php echo $this->session->flashdata("messagePr")?>
+      <?php echo $registrasi_info; ?>
+    </div>
+  <?php } ?>
+  <?php if(isset($registrasi_info)) { ?>
+  <div class="alert alert-info">
+      <?php echo $registrasi_info; ?>
     </div>
   <?php } ?>
     <!-- Profile Image -->
