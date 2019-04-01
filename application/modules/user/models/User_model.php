@@ -130,4 +130,55 @@ class User_model extends CI_Model {
 		$this->db->update($table,$data);
 		return true;
   	}
+
+  	public function get_doc_filename($value='')
+  	{
+  		$this->db->where('unique_id', $value);
+  		$query = $this->db->get('file_upload');
+  		if ($query->num_rows() > 0) {
+  			$row = $query->row_array();
+  			return $row['nama_file'];
+  		}
+  	}
+
+  	public function get_registration_status($id='ALL')
+  	{
+  		$role 	= $this->session->userdata ('user_details')[0]->user_type;
+  		if (strtoupper($id) === 'ALL') {
+  			if (strtoupper($role )=='ADMIN') {
+  				$param = array('account_status' => 0);
+  			} else {
+  				$param = array('account_status' => 1);
+  			}
+  			
+  		} else { $param = array('users_id' => $id, 'account_status' => 0); }
+  		
+  		$this->db->where($param);
+  		$query = $this->db->get('user_account_info');
+  		return $query;
+  	}
+
+  	public function update_registration_status()
+  	{
+  		$userid = $this->session->userdata ('user_details')[0]->name;
+  		$role 	= $this->session->userdata ('user_details')[0]->user_type;
+  		$seq_id = $this->input->post('seq_id');
+       	
+       	if (strtoupper($role )=='ADMIN') {
+       		$update_code = '1';
+       	} else if (strtoupper($role )=='MANAGER') {
+       		$update_code = '2';
+       	}
+
+       	$data = array(
+                'update_user'  		=> $userid, 
+                'update_date'  		=> date('Y-m-d H:i:s'), 
+                'account_status'  	=> $update_code
+            );
+ 
+        $this->db->where('seq_id', $seq_id);
+		$result = $this->db->update('user_account_info', $data);
+        return $result;
+    }
+
 }
