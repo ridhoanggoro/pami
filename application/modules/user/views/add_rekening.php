@@ -7,8 +7,18 @@
 		<?php } ?>
 		<div class="row">
 			<div class="col-xs-12">
-				<form action="#" id="myForm" role="form" data-toggle="validator" method="post" accept-charset="utf-8">
-					<!-- Wizard Start -->
+				<div class="box box-success">
+					<div class="box-header with-border">
+						<h3 class="box-title">Registrasi Pembukaan Akun</h3>
+						<div class="box-tools">
+						
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">           
+					<form action="#" id="myForm" role="form" data-toggle="validator" method="post" accept-charset="utf-8">
+
+					<!-- SmartWizard html -->
 					<div id="smartwizard">
 						<ul>
 							<li><a href="#step-1">Step 1<br /><small>Data Diri</small></a></li>
@@ -18,59 +28,67 @@
 						</ul>
 
 						<div>
-							<div id="step-1">
+							<div id="step-1">	
+								<!-- step-0 -->				
 								<div id="form-step-0" role="form" data-toggle="validator">
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="input-label">Nomor E-KTP</label>
-											<input id="id_number" name="id_number" type="tel" maxlength="16" class="form-control input-text" placeholder="Masukkan Nomor E-KTP kamu" required>
+											<input id="id_number" name="id_number" maxlength="16" class="form-control input-text" placeholder="Masukkan Nomor E-KTP kamu" required>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label class="input-label">Nama</label>
+											<input id="fullname" name="fullname" maxlength="130" type="text" class="form-control input-text" placeholder="Masukkan nama kamu sesuai E-KTP" required>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+										<label for="exampleInputFile">Upload Foto KTP</label>
+										<div class="dropzone">
+											<div class="dz-message">
+												<h3> Klik atau Drop Foto disini</h3>
+											</div>
+										</div>
+										<p class="help-block"><i>pastikan foto jelas dapat terbaca dan ukuran foto tidak lebih dari 10MB</i></p>
+										</div>
+									</div>
+									<div id="foto_result" name="foto_result">
+										<input id="foto" name="foto" type="text" class="input-text" hidden="">
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label class="input-label">Nama Ibu Kandung</label>
+											<input id="mother_name" name="mother_name" maxlength="50" type="text" class="mandatory form-control input-text" placeholder="Masukkan Nama Ibu Kandung kamu">
 											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-12">
-											<label class="input-label">Nama</label>
-											<input id="fullname" name="fullname" maxlength="130" type="text" class="mandatory form-control input-text" placeholder="Masukkan nama kamu sesuai E-KTP">
+											<label class="input-label">Tempat Lahir</label>
+											<input id="place_of_birth" name="place_of_birth" maxlength="100" type="text" class="mandatory form-control input-text" placeholder="Masukkan Tempat Lahir kamu">
+											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label for="exampleInputFile">Upload Foto KTP</label>
-
-										<div class="dropzone">
-
-											<div class="dz-message">
-												<h3> Klik atau Drop Foto disini</h3>
-											</div>
-
-										</div>
-										<p class="help-block"><i>pastikan foto jelas dapat terbaca dan ukuran foto tidak lebih dari 10MB</i></p>
-									</div>
-
-									<div id="foto_result" name="foto_result">
-										<input id="foto" name="foto" type="text" class="input-text" hidden="">
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<label class="input-label">Nama Ibu Kandung</label>
-											<input id="mother_name" name="mother_name" maxlength="50" type="text" class="mandatory form-control input-text" placeholder="Masukkan Nama Ibu Kandung kamu">
-										</div>
-									</div>
-
-									<div class="row">
 										<div class="col-sm-12">
 											<label class="input-label">Tempat Lahir</label>
 											<input id="place_of_birth" name="place_of_birth" maxlength="100" type="text" class="mandatory form-control input-text" placeholder="Masukkan Tempat Lahir kamu">
+											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-md-6 col-sm-12">
 											<label class="input-label">Tanggal Lahir</label>
 											<input id="date_of_birth" readonly="" name="date_of_birth" maxlength="15" type="hidden" class="mandatory form-control input-text hasDatepicker" placeholder="Masukkan Tanggal Lahir kamu">
 
-											<div class="row" id="dob-input">
+											<div class="form-group" id="dob-input">
 												<div class="col-xs-4">
 													<select id="dob-date" name="dob-date" class="form-control input-select input-dob-date">
 														<option id="opt_00" value="" disabled="" selected="">DD</option>
@@ -123,6 +141,7 @@
 														<option id="opt_month_11" value="11">Nov</option>
 														<option id="opt_month_12" value="12">Dec</option>
 													</select>
+													<div class="help-block with-errors"></div>
 												</div>
 												<div class="col-xs-4">
 													<input type="number" class="form-control input-text input-dob-year" placeholder="YYYY" maxlength="4" id="dob-year" name="dob-year">
@@ -130,9 +149,10 @@
 											</div>
 											<!-- <input type="text" id="dob-input" class="mandatory form-control input-text dob-input" placeholder="DD-MM-YYYY"> -->
 										</div>
+										
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="input-label">Status Perkawinan</label>
 											<select id="marital_status" name="marital_status" class="form-control">
@@ -141,10 +161,11 @@
 												<option value="2">Menikah</option>
 												<option value="3">Bercerai</option>
 											</select>
-										</div>
+											<div class="help-block with-errors"></div>
+										</div>								
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="input-label">Pendidikan Terakhir</label>
 											<select id="education" name="education" class="form-control select2" style="width: 100%;">
@@ -158,13 +179,14 @@
 												<option value="7" id="education_7">S3</option>
 												<option value="8" id="education_8">Lainnya</option>
 											</select>
-										</div>
+											<div class="help-block with-errors"></div>
+										</div>								
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="input-label">Agama</label>
-											<select id="religion" name="religion" class="form-control select2" style="width: 100%;">
+											<select id="religion" name="religion" class="form-control select2" style="width: 100%;" required>
 												<option value="">Pilih Agama</option>
 												<option value="1" id="religion_1">Islam</option>
 												<option value="2" id="religion_2">Protestan</option>
@@ -174,18 +196,20 @@
 												<option value="6" id="religion_6">Konghucu</option>
 												<option value="7" id="religion_7">Lainnya</option>
 											</select>
-										</div>
+											<div class="help-block with-errors"></div>
+										</div>								
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="input-label">Nomor ponsel</label>
 											<div class="input-group" id="mobile_phone_number_group">
 												<span class="input-group-addon input-addon">+62</span>
-												<input id="mobile_phone_number" name="mobile_phone_number" maxlength="25" type="tel" class="mandatory form-control input-text" placeholder="Masukkan Nomor Ponsel kamu">
+												<input id="mobile_phone_number" name="mobile_phone_number" maxlength="25" type="tel" class="mandatory form-control input-text" placeholder="Masukkan Nomor Ponsel kamu">										
 											</div>
 											<span id="error-personal-phone-number" class="error-msg"></span>
 											<p><i>Nomor telepon ini akan digunakan pada saat transaksi penjualan dan pengalihan portofolio kamu.</i></p>
+											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 
@@ -193,20 +217,22 @@
 										<div class="col-md-12">
 											<label class="control-label input-label">Alamat email</label>
 											<input id="email" name="email" maxlength="255" type="email" class="form-control mandatory input-text" placeholder="Masukkan alamat Email kamu">
+											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="input-label">Alamat di E-KTP</label>
-											<textarea id="ktp_address" name="ktp_address" maxlength="100" class="form-control kyc-input-textarea address mandatory" placeholder="Masukkan Alamat di E-KTP"></textarea>
+											<textarea id="ktp_address" name="ktp_address" maxlength="100" class="form-control" placeholder="Masukkan Alamat di E-KTP" required></textarea>
+											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 
-									<div class="row">
+									<div class="form-group">
 										<div class="col-sm-8">
 											<label class="input-label">Kota</label>
-											<select id="ktp_city" name="ktp_city" class="form-control select2" style="width: 100%;">
+											<select id="ktp_city" name="ktp_city" class="form-control select2" style="width: 100%;" required>
 												<option value="">Pilih Kota</option>
 												<option value="3173" id="ktp_city_3173">JAKARTA BARAT (KODYA)</option>
 												<option value="3171" id="ktp_city_3171">JAKARTA PUSAT (KODYA)</option>
@@ -724,284 +750,296 @@
 												<option value="3471" id="ktp_city_3471">YOGYAKARTA (KOTA)</option>
 												<option value="9999" id="ktp_city_9999">LAINNYA</option>
 											</select>
+											<div class="help-block with-errors"></div>
 										</div>
 										<div class="col-sm-4 kyc-code-col">
 											<label class="input-label">Kode Pos</label>
 											<input id="ktp_postal_code" maxlength="5" name="ktp_postal_code" type="tel" class="mandatory form-control input-text postal_code" value="" placeholder="Masukkan kode pos">
-										</div>
+											<div class="help-block with-errors"></div>
+										</div>	
 									</div>
-									</br>
 								</div>
+								<!-- end step-0 -->							
 							</div>
 							<div id="step-2">
-								<div class="row">
-									<div class="col-sm-12">
-										<label class="kyc-input-label">Pekerjaan</label>
-										<select id="occupation" name="occupation" class="form-control select2" style="width: 100%;">
-											<option value="">Pilih Pekerjaan</option>
-											<option value="10" id="occupation_10">Aparatur Sipil Negara</option>
-											<option value="11" id="occupation_11">BUMN/BUMD</option>
-											<option value="7" id="occupation_7">Dosen/Guru</option>
-											<option value="2" id="occupation_2">Ibu Rumah Tangga</option>
-											<option value="4" id="occupation_4">Pegawai Negeri</option>
-											<option value="8" id="occupation_8">Pegawai Swasta</option>
-											<option value="1" id="occupation_1">Pelajar/Mahasiswa</option>
-											<option value="6" id="occupation_6">Pensiunan</option>
-											<option value="5" id="occupation_5">TNI/POLRI</option>
-											<option value="3" id="occupation_3">Wiraswasta</option>
-											<option value="9" id="occupation_9">Lainnya</option>
-										</select>
+								<!-- step-1 -->				
+								<div id="form-step-1" role="form" data-toggle="validator">
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label class="kyc-input-label">Pekerjaan</label>
+											<select id="occupation" name="occupation" class="form-control select2" style="width: 100%;" required>
+												<option value="">Pilih Pekerjaan</option>
+												<option value="10" id="occupation_10">Aparatur Sipil Negara</option>
+												<option value="11" id="occupation_11">BUMN/BUMD</option>
+												<option value="7" id="occupation_7">Dosen/Guru</option>
+												<option value="2" id="occupation_2">Ibu Rumah Tangga</option>
+												<option value="4" id="occupation_4">Pegawai Negeri</option>
+												<option value="8" id="occupation_8">Pegawai Swasta</option>
+												<option value="1" id="occupation_1">Pelajar/Mahasiswa</option>
+												<option value="6" id="occupation_6">Pensiunan</option>
+												<option value="5" id="occupation_5">TNI/POLRI</option>
+												<option value="3" id="occupation_3">Wiraswasta</option>
+												<option value="9" id="occupation_9">Lainnya</option>
+											</select>
+											<div class="help-block with-errors"></div>
+										</div>
 									</div>
-								</div>
 
-								<div class="row hidden" id="nip_div">
-									<div class="col-sm-12">
-										<label class="kyc-input-label">Nomor Induk Pegawai</label>
-										<input id="nip" name="nip" maxlength="50" type="text" class="mandatory form-control kyc-input-text" disabled="" readonly="">
+									<div class="form-group hidden" id="nip_div">
+										<div class="col-sm-12">
+											<label class="kyc-input-label">Nomor Induk Pegawai</label>
+											<input id="nip" name="nip" maxlength="50" type="text" class="mandatory form-control kyc-input-text" disabled="" readonly="">
+											<div class="help-block with-errors"></div>
+										</div>
 									</div>
-								</div>
 
-								<div class="row">
-									<div class="col-sm-12">
-										<label class="kyc-input-label">Penghasilan Kotor/Tahun</label>
-										<select id="gross_income" name="gross_income" class="form-control select2" style="width: 100%;">
-											<option value="">Pilih Penghasilan Kotor</option>
-											<option value="1" id="gross_income_1">&lt; 10 juta / tahun</option>
-											<option value="2" id="gross_income_2">&gt; 10 – 50 juta / tahun</option>
-											<option value="3" id="gross_income_3">&gt; 50 – 100 juta / tahun</option>
-											<option value="4" id="gross_income_4">&gt; 100 – 500 juta / tahun</option>
-											<option value="5" id="gross_income_5">&gt; 500 juta – 1 milyar / tahun</option>
-											<option value="6" id="gross_income_6">&gt; 1 milyar / tahun</option>
-										</select>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label class="kyc-input-label">Penghasilan Kotor/Tahun</label>
+											<select id="gross_income" name="gross_income" class="form-control select2" style="width: 100%;" required>
+												<option value="">Pilih Penghasilan Kotor</option>
+												<option value="1" id="gross_income_1">&lt; 10 juta / tahun</option>
+												<option value="2" id="gross_income_2">&gt; 10 – 50 juta / tahun</option>
+												<option value="3" id="gross_income_3">&gt; 50 – 100 juta / tahun</option>
+												<option value="4" id="gross_income_4">&gt; 100 – 500 juta / tahun</option>
+												<option value="5" id="gross_income_5">&gt; 500 juta – 1 milyar / tahun</option>
+												<option value="6" id="gross_income_6">&gt; 1 milyar / tahun</option>
+											</select>
+											<div class="help-block with-errors"></div>
+										</div>
 									</div>
-								</div>
 
-								<div class="row">
-									<div class="col-sm-12">
-										<label class="kyc-input-label">Sumber Dana</label>
-										<select id="source_of_fund" name="source_of_fund" class="form-control select2" style="width: 100%;">
-											<option value="">Pilih Sumber Dana</option>
-											<option value="3" id="source_of_fund_3">Bunga Tabungan</option>
-											<option value="5" id="source_of_fund_5">Dana dari orang tua atau anak</option>
-											<option value="7" id="source_of_fund_7">Dana dari suami atau istri</option>
-											<option value="6" id="source_of_fund_6">Hibah</option>
-											<option value="2" id="source_of_fund_2">Keuntungan Bisnis</option>
-											<option value="9" id="source_of_fund_9">Keuntungan Investasi</option>
-											<option value="1" id="source_of_fund_1">Pendapatan</option>
-											<option value="8" id="source_of_fund_8">Undian</option>
-											<option value="4" id="source_of_fund_4">Warisan</option>
-											<option value="10" id="source_of_fund_10">Lainnya</option>
-										</select>
-									</div>
-								</div>
-								</br>
-							</div>
-							<div id="step-3">
-								<div class="row">
-									<div class="col-sm-12">
-										<label>Nama Bank</label>
-										<select id="bank_code" name="bank_code" class="form-control select2" style="width: 100%;">
-											<option value="">Pilih Bank</option>
-											<option value="CENAIDJA" id="bank_list_CENAIDJA">PT. BANK CENTRAL ASIA / BCA, TBK</option>
-											<option value="BMRIIDJA" id="bank_list_BMRIIDJA">PT. BANK MANDIRI (PERSERO), TBK</option>
-											<option value="BSMDIDJA" id="bank_list_BSMDIDJA">PT. BANK SYARIAH MANDIRI</option>
-											<option value="BDINIDJA" id="bank_list_BDINIDJA">PT. BANK DANAMON INDONESIA, TBK</option>
-											<option value="BNIAIDJA" id="bank_list_BNIAIDJA">PT. BANK CIMB NIAGA</option>
-											<option value="BBBAIDJA" id="bank_list_BBBAIDJA">PT. BANK PERMATA, TBK</option>
-											<option value="BRINIDJA" id="bank_list_BRINIDJA">PT. BANK RAKYAT INDONESIA / BRI (PERSERO), TBK</option>
-											<option value="BNINIDJA" id="bank_list_BNINIDJA">PT. BANK NEGARA INDONESIA / BNI (PERSERO), TBK</option>
-											<option value="SYCAIDJ1" id="bank_list_SYCAIDJ1">PT. BANK BCA SYARIAH</option>
-											<option value="MEGAIDJA" id="bank_list_MEGAIDJA">PT. BANK MEGA, TBK</option>
-											<option value="BBUKIDJA" id="bank_list_BBUKIDJA">PT. BANK BUKOPIN, TBK</option>
-											<option value="DJARIDJ1" id="bank_list_DJARIDJ1">PT. BANK SYARIAH BRI</option>
-											<option value="SBJKIDJA" id="bank_list_SBJKIDJA">PT. BANK SINARMAS, TBK</option>
-											<option value="SCBLIDJX" id="bank_list_SCBLIDJX">STANDARD CHARTERED BANK</option>
-											<option value="SDOBIDJ1" id="bank_list_SDOBIDJ1">PT. BANK SYARIAH BUKOPIN</option>
-											<option value="SIHBIDJ1" id="bank_list_SIHBIDJ1">PT. BANK MANDIRI TASPEN POS</option>
-											<option value="CITIIDJX" id="bank_list_CITIIDJX">CITIBANK, N.A.</option>
-											<option value="ABALIDBS" id="bank_list_ABALIDBS">PT. BPD BALI</option>
-											<option value="ABNAIDJA" id="bank_list_ABNAIDJA">THE ROYAL BANK OF SCOTLAND N.V.</option>
-											<option value="AGSSIDJA" id="bank_list_AGSSIDJA">PT. BANK AGRIS</option>
-											<option value="AGTBIDJA" id="bank_list_AGTBIDJA">PT. BANK RAKYAT INDONESIA AGRONIAGA, TBK</option>
-											<option value="ANTDIDJD" id="bank_list_ANTDIDJD">PT. BANK ANTARDAERAH</option>
-											<option value="ANZBIDJX" id="bank_list_ANZBIDJX">PT. BANK ANZ INDONESIA </option>
-											<option value="ARFAIDJ1" id="bank_list_ARFAIDJ1">PT. BANK PANIN DUBAI SYARIAH</option>
-											<option value="ARTGIDJA" id="bank_list_ARTGIDJA">PT. BANK ARTHA GRAHA INTERNASIONAL, TBK</option>
-											<option value="ATJSIDJ2" id="bank_list_ATJSIDJ2">PT. ARTAJASA PEMBAYARAN ELEKTRONIK</option>
-											<option value="ATOSIDJ1" id="bank_list_ATOSIDJ1">PT. BANK ARTOS INDONESIA</option>
-											<option value="AWANIDJA" id="bank_list_AWANIDJA">PT. BANK QNB INDONESIA, TBK</option>
-											<option value="BBAIIDJA" id="bank_list_BBAIIDJA">PT. BANK BUMI ARTA</option>
-											<option value="BBIJIDJA" id="bank_list_BBIJIDJA">PT. BANK UOB INDONESIA</option>
-											<option value="BCIAIDJA" id="bank_list_BCIAIDJA">PT. BANK CAPITAL INDONESIA</option>
-											<option value="BDIPIDJ1" id="bank_list_BDIPIDJ1">PT. BANK SAHABAT SAMPOERNA</option>
-											<option value="BDKIIDJ1" id="bank_list_BDKIIDJ1">PT. BPD DKI</option>
-											<option value="BICNIDJA" id="bank_list_BICNIDJA">PT. BANK COMMONWEALTH</option>
-											<option value="BIDXIDJA" id="bank_list_BIDXIDJA">PT. BANK INDEX SELINDO</option>
-											<option value="BKCHIDJA" id="bank_list_BKCHIDJA">BANK OF CHINA LIMITED</option>
-											<option value="BKKBIDJA" id="bank_list_BKKBIDJA">BANGKOK BANK PUBLIC, CO. LTD.</option>
-											<option value="BNPAIDJA" id="bank_list_BNPAIDJA">PT. BANK BNP PARIBAS INDONESIA</option>
-											<option value="BOFAID2X" id="bank_list_BOFAID2X">BANK OF AMERICA, N.A.</option>
-											<option value="BOTKIDJX" id="bank_list_BOTKIDJX">THE BOT MITSUBISHI UFJ, LTD.</option>
-											<option value="BPIAIDJA" id="bank_list_BPIAIDJA">PT. BANK RESONA PERDANIA</option>
-											<option value="BSDRIDJA" id="bank_list_BSDRIDJA">PT. BANK WOORI SAUDARA INDONESIA 1906, TBK</option>
-											<option value="BSSPIDSP" id="bank_list_BSSPIDSP">PT. BPD SUMATERA SELATAN DAN BANGKA BELITUNG</option>
-											<option value="BTANIDJA" id="bank_list_BTANIDJA">PT. BANK TABUNGAN NEGARA (PERSERO), TBK</option>
-											<option value="SUNIIDJA" id="bank_list_SUNIIDJA">PT. BANK TABUNGAN PENSIUNAN NASIONAL</option>
-											<option value="BUMIIDJA" id="bank_list_BUMIIDJA">PT. BANK MNC INTERNASIONAL, TBK</option>
-											<option value="BUSTIDJ1" id="bank_list_BUSTIDJ1">PT. BANK BISNIS INTERNASIONAL</option>
-											<option value="BUTGIDJ1" id="bank_list_BUTGIDJ1">PT. BANK MEGA SYARIAH</option>
-											<option value="CHASIDJX" id="bank_list_CHASIDJX">JPMORGAN CHASE BANK, N.A.</option>
-											<option value="CICTIDJA" id="bank_list_CICTIDJA">PT. BANK JTRUST INDONESIA, TBK</option>
-											<option value="CNBAIDJ1" id="bank_list_CNBAIDJ1">PT. CENTRATAMA NASIONAL BANK</option>
-											<option value="CTCBIDJA" id="bank_list_CTCBIDJA">PT. BANK CTBC INDONESIA</option>
-											<option value="DBSBIDJA" id="bank_list_DBSBIDJA">PT. BANK DBS INDONESIA</option>
-											<option value="DEUTIDJA" id="bank_list_DEUTIDJA">DEUTSCHE BANK, A.G.</option>
-											<option value="HSBCIDJA" id="bank_list_HSBCIDJA">PT. Bank HSBC Indonesia, Tbk.</option>
-											<option value="EKSTIDJ1" id="bank_list_EKSTIDJ1">PT. Bank Pembangunan Daerah Banten, Tbk.</option>
-											<option value="FAMAIDJ1" id="bank_list_FAMAIDJ1">PT. BANK FAMA INTERNASIONAL</option>
-											<option value="FINTIDJ1" id="bank_list_FINTIDJ1">PT. FINNET INDONESIA</option>
-											<option value="GNESIDJA" id="bank_list_GNESIDJA">PT. BANK GANESHA</option>
-											<option value="HNBNIDJA" id="bank_list_HNBNIDJA">PT. BANK KEB HANA INDONESIA</option>
-											<option value="HRDAIDJ1" id="bank_list_HRDAIDJ1">PT. BANK HARDA INTERNASIONAL</option>
-											<option value="HSHKIDJ1" id="bank_list_HSHKIDJ1">THE HONGKONG AND SHANGHAI BANK</option>
-											<option value="IBBKIDJA" id="bank_list_IBBKIDJA">PT. BANK MAYBANK INDONESIA, TBK</option>
-											<option value="ICBKIDJA" id="bank_list_ICBKIDJA">PT. BANK ICBC INDONESIA</option>
-											<option value="IDMOIDJ1" id="bank_list_IDMOIDJ1">PT. BANK SBI INDONESIA</option>
-											<option value="INPBIDJ1" id="bank_list_INPBIDJ1">PT. BANK INA PERDANA</option>
-											<option value="JSABIDJ1" id="bank_list_JSABIDJ1">PT. BANK JASA JAKARTA</option>
-											<option value="KSEBIDJ1" id="bank_list_KSEBIDJ1">PT. BANK KESEJAHTERAAN EKONOMI</option>
-											<option value="KSEIIDJ1" id="bank_list_KSEIIDJ1">PT. KUSTODIAN SENTRAL EFEK INDONESIA</option>
-											<option value="LFIBIDJ1" id="bank_list_LFIBIDJ1">PT. BANK NATIONALNOBU</option>
-											<option value="LMANIDJ1" id="bank_list_LMANIDJ1">PT. BANK DINAR INDONESIA</option>
-											<option value="LOMAIDJ1" id="bank_list_LOMAIDJ1">PT. BANK AMAR INDONESIA</option>
-											<option value="LPEIIDJ1" id="bank_list_LPEIIDJ1">INDONESIA EXIMBANK</option>
-											<option value="MASBIDJ1" id="bank_list_MASBIDJ1">PT. BANK MULTI ARTA SENTOSA</option>
-											<option value="MASDIDJ1" id="bank_list_MASDIDJ1">PT. BANK MASPION INDONESIA</option>
-											<option value="MAYAIDJA" id="bank_list_MAYAIDJA">PT. BANK MAYAPADA INTERNASIONAL, TBK</option>
-											<option value="MAYOIDJA" id="bank_list_MAYOIDJA">PT. BANK MAYORA</option>
-											<option value="MBBEIDJA" id="bank_list_MBBEIDJA">PT. BANK MAYBANK SYARIAH INDONESIA</option>
-											<option value="MCORIDJA" id="bank_list_MCORIDJA">PT. BANK WINDU KENTJANA INTERNASIONAL, TBK</option>
-											<option value="MEDHIDS1" id="bank_list_MEDHIDS1">PT. BANK MESTIKA DHARMA</option>
-											<option value="MEEKIDJ1" id="bank_list_MEEKIDJ1">PT. BANK SHINHAN INDONESIA</option>
-											<option value="MGABIDJ1" id="bank_list_MGABIDJ1">PT. BANK MITRA NIAGA</option>
-											<option value="MHCCIDJA" id="bank_list_MHCCIDJA">PT. BANK MIZUHO INDONESIA</option>
-											<option value="MUABIDJA" id="bank_list_MUABIDJA">PT. BANK MUAMALAT INDONESIA, TBK</option>
-											<option value="NISPIDJA" id="bank_list_NISPIDJA">PT. BANK OCBC NISP, TBK</option>
-											<option value="NUPAIDJ6" id="bank_list_NUPAIDJ6">PT. BANK NUSANTARA PARAHYANGAN</option>
-											<option value="PDACIDJ1" id="bank_list_PDACIDJ1">PT. BPD ACEH</option>
-											<option value="PDBKIDJ1" id="bank_list_PDBKIDJ1">PT. BPD BENGKULU</option>
-											<option value="PDIJIDJ1" id="bank_list_PDIJIDJ1">PT. BPD PAPUA</option>
-											<option value="PDJBIDJA" id="bank_list_PDJBIDJA">PT. BANK JABAR BANTEN, TBK</option>
-											<option value="PDJGIDJ1" id="bank_list_PDJGIDJ1">PT. BPD JAWA TENGAH</option>
-											<option value="PDJMIDJ1" id="bank_list_PDJMIDJ1">PT. BPD JAMBI</option>
-											<option value="PDJTIDJ1" id="bank_list_PDJTIDJ1">PT. BPD JAWA TIMUR</option>
-											<option value="PDKBIDJ1" id="bank_list_PDKBIDJ1">PT. BPD KALIMANTAN BARAT</option>
-											<option value="PDKGIDJ1" id="bank_list_PDKGIDJ1">PT. BPD KALIMANTAN TENGAH</option>
-											<option value="PDKSIDJ1" id="bank_list_PDKSIDJ1">PT. BPD KALIMANTAN SELATAN</option>
-											<option value="PDKTIDJ1" id="bank_list_PDKTIDJ1">PT. BPD KALIMANTAN TIMUR</option>
-											<option value="PDLPIDJ1" id="bank_list_PDLPIDJ1">PT. BPD LAMPUNG</option>
-											<option value="PDMLIDJ1" id="bank_list_PDMLIDJ1">PT. BPD MALUKU</option>
-											<option value="PDNBIDJ1" id="bank_list_PDNBIDJ1">PT. BPD NUSA TENGGARA BARAT</option>
-											<option value="PDNTIDJ1" id="bank_list_PDNTIDJ1">PT. BPD NUSA TENGGARA TIMUR</option>
-											<option value="PDRIIDJA" id="bank_list_PDRIIDJA">PT. BPD RIAU KEPRI</option>
-											<option value="PDSBIDJ1" id="bank_list_PDSBIDJ1">PT. BPD SUMATERA BARAT</option>
-											<option value="PDSUIDJ1" id="bank_list_PDSUIDJ1">PT. BPD SUMATERA UTARA</option>
-											<option value="PDWGIDJ1" id="bank_list_PDWGIDJ1">PT. BPD SULAWESI TENGAH</option>
-											<option value="PDWRIDJ1" id="bank_list_PDWRIDJ1">PT. BPD SULAWESI TENGGARA</option>
-											<option value="PDWSIDJ1" id="bank_list_PDWSIDJ1">PT. BPD SULAWESI SELATAN DAN SULAWESI BARAT</option>
-											<option value="PDWUIDJ1" id="bank_list_PDWUIDJ1">PT. BPD SULAWESI UTARA</option>
-											<option value="PDYKIDJ1" id="bank_list_PDYKIDJ1">PT. BPD YOGYAKARTA</option>
-											<option value="PINBIDJA" id="bank_list_PINBIDJA">PT. PAN INDONESIA BANK</option>
-											<option value="PMASIDJ1" id="bank_list_PMASIDJ1">PT. BANK PRIMA MASTER</option>
-											<option value="PUBAIDJ1" id="bank_list_PUBAIDJ1">PT. BANK TABUNGAN PENSIUNAN NASIONAL SYARIAH</option>
-											<option value="RABOIDJA" id="bank_list_RABOIDJA">PT. BANK RABOBANK INTERNASIONAL INDONESIA</option>
-											<option value="RIPAIDJ1" id="bank_list_RIPAIDJ1">PT. BANK ANDARA</option>
-											<option value="ROYBIDJ1" id="bank_list_ROYBIDJ1">PT. BANK ROYAL INDONESIA</option>
-											<option value="SWAGIDJ1" id="bank_list_SWAGIDJ1">PT. BANK VICTORIA SYARIAH</option>
-											<option value="SWBAIDJ1" id="bank_list_SWBAIDJ1">PT. BANK OF INDIA INDONESIA, TBK</option>
-											<option value="SYACIDJ1" id="bank_list_SYACIDJ1">PT. BANK ACEH SYARIAH</option>
-											<option value="SYBBIDJ1" id="bank_list_SYBBIDJ1">PT. BANK PERMATA, TBK UNIT USAHA SYARIAH</option>
-											<option value="SYBDIDJ1" id="bank_list_SYBDIDJ1">PT. BANK DANAMON INDONESIA UNIT USAHA SYARIAH</option>
-											<option value="SYBKIDJ1" id="bank_list_SYBKIDJ1">PT. BANK MAYBANK INDONESIA, TBK UNIT USAHA SYARIAH</option>
-											<option value="SYBTIDJ1" id="bank_list_SYBTIDJ1">PT. BANK TABUNGAN NEGARA (PERSERO) UNIT USAHA SYARIAH</option>
-											<option value="SYDKIDJ1" id="bank_list_SYDKIDJ1">PT. BPD DKI UNIT USAHA SYARIAH</option>
-											<option value="SYJBIDJ1" id="bank_list_SYJBIDJ1">PT. BANK JABAR BANTEN SYARIAH</option>
-											<option value="SYJGIDJ1" id="bank_list_SYJGIDJ1">PT. BPD JAWA TENGAH UNIT USAHA SYARIAH</option>
-											<option value="SYJMIDJ1" id="bank_list_SYJMIDJ1">PT. BPD JAMBI UNIT USAHA SYARIAH</option>
-											<option value="SYJTIDJ1" id="bank_list_SYJTIDJ1">PT. BPD JAWA TIMUR UNIT USAHA SYARIAH</option>
-											<option value="SYKBIDJ1" id="bank_list_SYKBIDJ1">PT. BPD KALIMANTAN BARAT UNIT USAHA SYARIAH</option>
-											<option value="SYKSIDJ1" id="bank_list_SYKSIDJ1">PT. BPD KALIMANTAN SELATAN UNIT USAHA SYARIAH</option>
-											<option value="SYKTIDJ1" id="bank_list_SYKTIDJ1">PT. BPD KALIMANTAN TIMUR UNIT USAHA SYARIAH</option>
-											<option value="SYNAIDJ1" id="bank_list_SYNAIDJ1">PT. BANK CIMB NIAGA, TBK UNIT USAHA SYARIAH</option>
-											<option value="SYNBIDJ1" id="bank_list_SYNBIDJ1">PT. BPD NUSA TENGGARA BARAT UNIT USAHA SYARIAH</option>
-											<option value="SYNIIDJ1" id="bank_list_SYNIIDJ1">PT. BANK NEGARA INDONESIA SYARIAH</option>
-											<option value="SYONIDJ1" id="bank_list_SYONIDJ1">PT. BANK OCBC NISP, TBK UNIT USAHA SYARIAH</option>
-											<option value="SYRIIDJ1" id="bank_list_SYRIIDJ1">PT. BPD RIAU UNIT USAHA SYARIAH</option>
-											<option value="SYSBIDJ1" id="bank_list_SYSBIDJ1">PT. BPD SUMATERA BARAT UNIT USAHA SYARIAH</option>
-											<option value="SYSSIDJ1" id="bank_list_SYSSIDJ1">PT. BPD SUMATERA SELATAN DAN BANGKA BELITUNG UNIT USAHA SYARIAH</option>
-											<option value="SYSUIDJ1" id="bank_list_SYSUIDJ1">PT. BPD SUMATERA UTARA UNIT USAHA SYARIAH</option>
-											<option value="SYTBIDJ1" id="bank_list_SYTBIDJ1">PT. BANK SINARMAS UNIT USAHA SYARIAH</option>
-											<option value="SYWSIDJ1" id="bank_list_SYWSIDJ1">PT. BPD SULAWESI SELATAN DAN SULAWESI BARAT UNIT USAHA SYARIAH</option>
-											<option value="SYYKIDJ1" id="bank_list_SYYKIDJ1">PT. BPD YOGYAKARTA UNIT USAHA SYARIAH</option>
-											<option value="VICTIDJ1" id="bank_list_VICTIDJ1">PT. BANK VICTORIA INTERNASIONAL</option>
-											<option value="YUDBIDJ1" id="bank_list_YUDBIDJ1">PT. BANK YUDHA BHAKTI</option>
-										</select>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<label>Nomor Rekening</label>
-										<input type="tel" class="form-control kyc-input-text" id="account_number" name="account_number" maxlength="20" value="">
-										<p><i>Harap pastikan Anda telah memasukkan nomor akun yang benar, ini akan digunakan saat Anda menjual reksa dana..</i></p>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<label>Nama Rekening</label>
-										<input type="text" class="form-control kyc-input-text" id="account_name" name="account_name" maxlength="25">
-										<p><i>Anda hanya bisa menambahkan rekening bank yang menggunakan nama yang sama seperti di E-KTP.</i></p>
-									</div>
-								</div>
-							</div>
-							<div id="step-4" role="form" data-toggle="validator">
-								<div class="row">
-									<div class="col-sm-12 terms-div-header-col">
-										<h3>Pernyataan Persetujuan</h3>
-									</div>
-								</div>
-
-								<div class="row terms-agree-row">
-									<div class="col-sm-12 terms-agree-col">
-										<h4>Dengan menandatangani ini, Saya menyatakan bahwa:</h4>
-										<ol>
-											<li>Mengisi data dengan benar dan lengkap.</li>
-											<li>Mengerti dan menyetujui <b><a href="https://pami.olmatix.com/termcondition" target="_blank">Syarat &amp; Ketentuan</a></b></li>
-											<li>Mengerti dan menyetujui <a href="https://pami.olmatix.com/privacypolicy" target="_blank">Kebijakan Privasi</a>
-											</li>
-										</ol>
-									</div>
-								</div>
-
-								<div class="row terms-sign-row">
-									<div class="col-sm-12">
-										<div id="terms-check" data-toggle="validator">
-											<input type="checkbox" name="agree" value="yes" class="check" id="agree" data-error="Please accept the Terms and Conditions" required>
-											<label for="kyc-agree" class="input-check-label">Saya setuju dengan Syarat &amp; Ketentuan PAMI.</label>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label class="kyc-input-label">Sumber Dana</label>
+											<select id="source_of_fund" name="source_of_fund" class="form-control select2" style="width: 100%;" required>
+												<option value="">Pilih Sumber Dana</option>
+												<option value="3" id="source_of_fund_3">Bunga Tabungan</option>
+												<option value="5" id="source_of_fund_5">Dana dari orang tua atau anak</option>
+												<option value="7" id="source_of_fund_7">Dana dari suami atau istri</option>
+												<option value="6" id="source_of_fund_6">Hibah</option>
+												<option value="2" id="source_of_fund_2">Keuntungan Bisnis</option>
+												<option value="9" id="source_of_fund_9">Keuntungan Investasi</option>
+												<option value="1" id="source_of_fund_1">Pendapatan</option>
+												<option value="8" id="source_of_fund_8">Undian</option>
+												<option value="4" id="source_of_fund_4">Warisan</option>
+												<option value="10" id="source_of_fund_10">Lainnya</option>
+											</select>
+											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 								</div>
-
-								<div class="row text-center" id="sign-error" style="padding-top: 10px;">
-									<label class="kyc-input-label">
-										<?php echo date('d F Y'); ?>
-									</label>
-									<div>
+								<!-- end step-1 -->	
+							</div>
+							<div id="step-3">						
+								<div id="form-step-2" role="form" data-toggle="validator">
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label>Nama Bank</label>
+											<select id="bank_code" name="bank_code" class="form-control select2" style="width: 100%;" required>
+												<option value="">Pilih Bank</option>
+												<option value="CENAIDJA" id="bank_list_CENAIDJA">PT. BANK CENTRAL ASIA / BCA, TBK</option>
+												<option value="BMRIIDJA" id="bank_list_BMRIIDJA">PT. BANK MANDIRI (PERSERO), TBK</option>
+												<option value="BSMDIDJA" id="bank_list_BSMDIDJA">PT. BANK SYARIAH MANDIRI</option>
+												<option value="BDINIDJA" id="bank_list_BDINIDJA">PT. BANK DANAMON INDONESIA, TBK</option>
+												<option value="BNIAIDJA" id="bank_list_BNIAIDJA">PT. BANK CIMB NIAGA</option>
+												<option value="BBBAIDJA" id="bank_list_BBBAIDJA">PT. BANK PERMATA, TBK</option>
+												<option value="BRINIDJA" id="bank_list_BRINIDJA">PT. BANK RAKYAT INDONESIA / BRI (PERSERO), TBK</option>
+												<option value="BNINIDJA" id="bank_list_BNINIDJA">PT. BANK NEGARA INDONESIA / BNI (PERSERO), TBK</option>
+												<option value="SYCAIDJ1" id="bank_list_SYCAIDJ1">PT. BANK BCA SYARIAH</option>
+												<option value="MEGAIDJA" id="bank_list_MEGAIDJA">PT. BANK MEGA, TBK</option>
+												<option value="BBUKIDJA" id="bank_list_BBUKIDJA">PT. BANK BUKOPIN, TBK</option>
+												<option value="DJARIDJ1" id="bank_list_DJARIDJ1">PT. BANK SYARIAH BRI</option>
+												<option value="SBJKIDJA" id="bank_list_SBJKIDJA">PT. BANK SINARMAS, TBK</option>
+												<option value="SCBLIDJX" id="bank_list_SCBLIDJX">STANDARD CHARTERED BANK</option>
+												<option value="SDOBIDJ1" id="bank_list_SDOBIDJ1">PT. BANK SYARIAH BUKOPIN</option>
+												<option value="SIHBIDJ1" id="bank_list_SIHBIDJ1">PT. BANK MANDIRI TASPEN POS</option>
+												<option value="CITIIDJX" id="bank_list_CITIIDJX">CITIBANK, N.A.</option>
+												<option value="ABALIDBS" id="bank_list_ABALIDBS">PT. BPD BALI</option>
+												<option value="ABNAIDJA" id="bank_list_ABNAIDJA">THE ROYAL BANK OF SCOTLAND N.V.</option>
+												<option value="AGSSIDJA" id="bank_list_AGSSIDJA">PT. BANK AGRIS</option>
+												<option value="AGTBIDJA" id="bank_list_AGTBIDJA">PT. BANK RAKYAT INDONESIA AGRONIAGA, TBK</option>
+												<option value="ANTDIDJD" id="bank_list_ANTDIDJD">PT. BANK ANTARDAERAH</option>
+												<option value="ANZBIDJX" id="bank_list_ANZBIDJX">PT. BANK ANZ INDONESIA </option>
+												<option value="ARFAIDJ1" id="bank_list_ARFAIDJ1">PT. BANK PANIN DUBAI SYARIAH</option>
+												<option value="ARTGIDJA" id="bank_list_ARTGIDJA">PT. BANK ARTHA GRAHA INTERNASIONAL, TBK</option>
+												<option value="ATJSIDJ2" id="bank_list_ATJSIDJ2">PT. ARTAJASA PEMBAYARAN ELEKTRONIK</option>
+												<option value="ATOSIDJ1" id="bank_list_ATOSIDJ1">PT. BANK ARTOS INDONESIA</option>
+												<option value="AWANIDJA" id="bank_list_AWANIDJA">PT. BANK QNB INDONESIA, TBK</option>
+												<option value="BBAIIDJA" id="bank_list_BBAIIDJA">PT. BANK BUMI ARTA</option>
+												<option value="BBIJIDJA" id="bank_list_BBIJIDJA">PT. BANK UOB INDONESIA</option>
+												<option value="BCIAIDJA" id="bank_list_BCIAIDJA">PT. BANK CAPITAL INDONESIA</option>
+												<option value="BDIPIDJ1" id="bank_list_BDIPIDJ1">PT. BANK SAHABAT SAMPOERNA</option>
+												<option value="BDKIIDJ1" id="bank_list_BDKIIDJ1">PT. BPD DKI</option>
+												<option value="BICNIDJA" id="bank_list_BICNIDJA">PT. BANK COMMONWEALTH</option>
+												<option value="BIDXIDJA" id="bank_list_BIDXIDJA">PT. BANK INDEX SELINDO</option>
+												<option value="BKCHIDJA" id="bank_list_BKCHIDJA">BANK OF CHINA LIMITED</option>
+												<option value="BKKBIDJA" id="bank_list_BKKBIDJA">BANGKOK BANK PUBLIC, CO. LTD.</option>
+												<option value="BNPAIDJA" id="bank_list_BNPAIDJA">PT. BANK BNP PARIBAS INDONESIA</option>
+												<option value="BOFAID2X" id="bank_list_BOFAID2X">BANK OF AMERICA, N.A.</option>
+												<option value="BOTKIDJX" id="bank_list_BOTKIDJX">THE BOT MITSUBISHI UFJ, LTD.</option>
+												<option value="BPIAIDJA" id="bank_list_BPIAIDJA">PT. BANK RESONA PERDANIA</option>
+												<option value="BSDRIDJA" id="bank_list_BSDRIDJA">PT. BANK WOORI SAUDARA INDONESIA 1906, TBK</option>
+												<option value="BSSPIDSP" id="bank_list_BSSPIDSP">PT. BPD SUMATERA SELATAN DAN BANGKA BELITUNG</option>
+												<option value="BTANIDJA" id="bank_list_BTANIDJA">PT. BANK TABUNGAN NEGARA (PERSERO), TBK</option>
+												<option value="SUNIIDJA" id="bank_list_SUNIIDJA">PT. BANK TABUNGAN PENSIUNAN NASIONAL</option>
+												<option value="BUMIIDJA" id="bank_list_BUMIIDJA">PT. BANK MNC INTERNASIONAL, TBK</option>
+												<option value="BUSTIDJ1" id="bank_list_BUSTIDJ1">PT. BANK BISNIS INTERNASIONAL</option>
+												<option value="BUTGIDJ1" id="bank_list_BUTGIDJ1">PT. BANK MEGA SYARIAH</option>
+												<option value="CHASIDJX" id="bank_list_CHASIDJX">JPMORGAN CHASE BANK, N.A.</option>
+												<option value="CICTIDJA" id="bank_list_CICTIDJA">PT. BANK JTRUST INDONESIA, TBK</option>
+												<option value="CNBAIDJ1" id="bank_list_CNBAIDJ1">PT. CENTRATAMA NASIONAL BANK</option>
+												<option value="CTCBIDJA" id="bank_list_CTCBIDJA">PT. BANK CTBC INDONESIA</option>
+												<option value="DBSBIDJA" id="bank_list_DBSBIDJA">PT. BANK DBS INDONESIA</option>
+												<option value="DEUTIDJA" id="bank_list_DEUTIDJA">DEUTSCHE BANK, A.G.</option>
+												<option value="HSBCIDJA" id="bank_list_HSBCIDJA">PT. Bank HSBC Indonesia, Tbk.</option>
+												<option value="EKSTIDJ1" id="bank_list_EKSTIDJ1">PT. Bank Pembangunan Daerah Banten, Tbk.</option>
+												<option value="FAMAIDJ1" id="bank_list_FAMAIDJ1">PT. BANK FAMA INTERNASIONAL</option>
+												<option value="FINTIDJ1" id="bank_list_FINTIDJ1">PT. FINNET INDONESIA</option>
+												<option value="GNESIDJA" id="bank_list_GNESIDJA">PT. BANK GANESHA</option>
+												<option value="HNBNIDJA" id="bank_list_HNBNIDJA">PT. BANK KEB HANA INDONESIA</option>
+												<option value="HRDAIDJ1" id="bank_list_HRDAIDJ1">PT. BANK HARDA INTERNASIONAL</option>
+												<option value="HSHKIDJ1" id="bank_list_HSHKIDJ1">THE HONGKONG AND SHANGHAI BANK</option>
+												<option value="IBBKIDJA" id="bank_list_IBBKIDJA">PT. BANK MAYBANK INDONESIA, TBK</option>
+												<option value="ICBKIDJA" id="bank_list_ICBKIDJA">PT. BANK ICBC INDONESIA</option>
+												<option value="IDMOIDJ1" id="bank_list_IDMOIDJ1">PT. BANK SBI INDONESIA</option>
+												<option value="INPBIDJ1" id="bank_list_INPBIDJ1">PT. BANK INA PERDANA</option>
+												<option value="JSABIDJ1" id="bank_list_JSABIDJ1">PT. BANK JASA JAKARTA</option>
+												<option value="KSEBIDJ1" id="bank_list_KSEBIDJ1">PT. BANK KESEJAHTERAAN EKONOMI</option>
+												<option value="KSEIIDJ1" id="bank_list_KSEIIDJ1">PT. KUSTODIAN SENTRAL EFEK INDONESIA</option>
+												<option value="LFIBIDJ1" id="bank_list_LFIBIDJ1">PT. BANK NATIONALNOBU</option>
+												<option value="LMANIDJ1" id="bank_list_LMANIDJ1">PT. BANK DINAR INDONESIA</option>
+												<option value="LOMAIDJ1" id="bank_list_LOMAIDJ1">PT. BANK AMAR INDONESIA</option>
+												<option value="LPEIIDJ1" id="bank_list_LPEIIDJ1">INDONESIA EXIMBANK</option>
+												<option value="MASBIDJ1" id="bank_list_MASBIDJ1">PT. BANK MULTI ARTA SENTOSA</option>
+												<option value="MASDIDJ1" id="bank_list_MASDIDJ1">PT. BANK MASPION INDONESIA</option>
+												<option value="MAYAIDJA" id="bank_list_MAYAIDJA">PT. BANK MAYAPADA INTERNASIONAL, TBK</option>
+												<option value="MAYOIDJA" id="bank_list_MAYOIDJA">PT. BANK MAYORA</option>
+												<option value="MBBEIDJA" id="bank_list_MBBEIDJA">PT. BANK MAYBANK SYARIAH INDONESIA</option>
+												<option value="MCORIDJA" id="bank_list_MCORIDJA">PT. BANK WINDU KENTJANA INTERNASIONAL, TBK</option>
+												<option value="MEDHIDS1" id="bank_list_MEDHIDS1">PT. BANK MESTIKA DHARMA</option>
+												<option value="MEEKIDJ1" id="bank_list_MEEKIDJ1">PT. BANK SHINHAN INDONESIA</option>
+												<option value="MGABIDJ1" id="bank_list_MGABIDJ1">PT. BANK MITRA NIAGA</option>
+												<option value="MHCCIDJA" id="bank_list_MHCCIDJA">PT. BANK MIZUHO INDONESIA</option>
+												<option value="MUABIDJA" id="bank_list_MUABIDJA">PT. BANK MUAMALAT INDONESIA, TBK</option>
+												<option value="NISPIDJA" id="bank_list_NISPIDJA">PT. BANK OCBC NISP, TBK</option>
+												<option value="NUPAIDJ6" id="bank_list_NUPAIDJ6">PT. BANK NUSANTARA PARAHYANGAN</option>
+												<option value="PDACIDJ1" id="bank_list_PDACIDJ1">PT. BPD ACEH</option>
+												<option value="PDBKIDJ1" id="bank_list_PDBKIDJ1">PT. BPD BENGKULU</option>
+												<option value="PDIJIDJ1" id="bank_list_PDIJIDJ1">PT. BPD PAPUA</option>
+												<option value="PDJBIDJA" id="bank_list_PDJBIDJA">PT. BANK JABAR BANTEN, TBK</option>
+												<option value="PDJGIDJ1" id="bank_list_PDJGIDJ1">PT. BPD JAWA TENGAH</option>
+												<option value="PDJMIDJ1" id="bank_list_PDJMIDJ1">PT. BPD JAMBI</option>
+												<option value="PDJTIDJ1" id="bank_list_PDJTIDJ1">PT. BPD JAWA TIMUR</option>
+												<option value="PDKBIDJ1" id="bank_list_PDKBIDJ1">PT. BPD KALIMANTAN BARAT</option>
+												<option value="PDKGIDJ1" id="bank_list_PDKGIDJ1">PT. BPD KALIMANTAN TENGAH</option>
+												<option value="PDKSIDJ1" id="bank_list_PDKSIDJ1">PT. BPD KALIMANTAN SELATAN</option>
+												<option value="PDKTIDJ1" id="bank_list_PDKTIDJ1">PT. BPD KALIMANTAN TIMUR</option>
+												<option value="PDLPIDJ1" id="bank_list_PDLPIDJ1">PT. BPD LAMPUNG</option>
+												<option value="PDMLIDJ1" id="bank_list_PDMLIDJ1">PT. BPD MALUKU</option>
+												<option value="PDNBIDJ1" id="bank_list_PDNBIDJ1">PT. BPD NUSA TENGGARA BARAT</option>
+												<option value="PDNTIDJ1" id="bank_list_PDNTIDJ1">PT. BPD NUSA TENGGARA TIMUR</option>
+												<option value="PDRIIDJA" id="bank_list_PDRIIDJA">PT. BPD RIAU KEPRI</option>
+												<option value="PDSBIDJ1" id="bank_list_PDSBIDJ1">PT. BPD SUMATERA BARAT</option>
+												<option value="PDSUIDJ1" id="bank_list_PDSUIDJ1">PT. BPD SUMATERA UTARA</option>
+												<option value="PDWGIDJ1" id="bank_list_PDWGIDJ1">PT. BPD SULAWESI TENGAH</option>
+												<option value="PDWRIDJ1" id="bank_list_PDWRIDJ1">PT. BPD SULAWESI TENGGARA</option>
+												<option value="PDWSIDJ1" id="bank_list_PDWSIDJ1">PT. BPD SULAWESI SELATAN DAN SULAWESI BARAT</option>
+												<option value="PDWUIDJ1" id="bank_list_PDWUIDJ1">PT. BPD SULAWESI UTARA</option>
+												<option value="PDYKIDJ1" id="bank_list_PDYKIDJ1">PT. BPD YOGYAKARTA</option>
+												<option value="PINBIDJA" id="bank_list_PINBIDJA">PT. PAN INDONESIA BANK</option>
+												<option value="PMASIDJ1" id="bank_list_PMASIDJ1">PT. BANK PRIMA MASTER</option>
+												<option value="PUBAIDJ1" id="bank_list_PUBAIDJ1">PT. BANK TABUNGAN PENSIUNAN NASIONAL SYARIAH</option>
+												<option value="RABOIDJA" id="bank_list_RABOIDJA">PT. BANK RABOBANK INTERNASIONAL INDONESIA</option>
+												<option value="RIPAIDJ1" id="bank_list_RIPAIDJ1">PT. BANK ANDARA</option>
+												<option value="ROYBIDJ1" id="bank_list_ROYBIDJ1">PT. BANK ROYAL INDONESIA</option>
+												<option value="SWAGIDJ1" id="bank_list_SWAGIDJ1">PT. BANK VICTORIA SYARIAH</option>
+												<option value="SWBAIDJ1" id="bank_list_SWBAIDJ1">PT. BANK OF INDIA INDONESIA, TBK</option>
+												<option value="SYACIDJ1" id="bank_list_SYACIDJ1">PT. BANK ACEH SYARIAH</option>
+												<option value="SYBBIDJ1" id="bank_list_SYBBIDJ1">PT. BANK PERMATA, TBK UNIT USAHA SYARIAH</option>
+												<option value="SYBDIDJ1" id="bank_list_SYBDIDJ1">PT. BANK DANAMON INDONESIA UNIT USAHA SYARIAH</option>
+												<option value="SYBKIDJ1" id="bank_list_SYBKIDJ1">PT. BANK MAYBANK INDONESIA, TBK UNIT USAHA SYARIAH</option>
+												<option value="SYBTIDJ1" id="bank_list_SYBTIDJ1">PT. BANK TABUNGAN NEGARA (PERSERO) UNIT USAHA SYARIAH</option>
+												<option value="SYDKIDJ1" id="bank_list_SYDKIDJ1">PT. BPD DKI UNIT USAHA SYARIAH</option>
+												<option value="SYJBIDJ1" id="bank_list_SYJBIDJ1">PT. BANK JABAR BANTEN SYARIAH</option>
+												<option value="SYJGIDJ1" id="bank_list_SYJGIDJ1">PT. BPD JAWA TENGAH UNIT USAHA SYARIAH</option>
+												<option value="SYJMIDJ1" id="bank_list_SYJMIDJ1">PT. BPD JAMBI UNIT USAHA SYARIAH</option>
+												<option value="SYJTIDJ1" id="bank_list_SYJTIDJ1">PT. BPD JAWA TIMUR UNIT USAHA SYARIAH</option>
+												<option value="SYKBIDJ1" id="bank_list_SYKBIDJ1">PT. BPD KALIMANTAN BARAT UNIT USAHA SYARIAH</option>
+												<option value="SYKSIDJ1" id="bank_list_SYKSIDJ1">PT. BPD KALIMANTAN SELATAN UNIT USAHA SYARIAH</option>
+												<option value="SYKTIDJ1" id="bank_list_SYKTIDJ1">PT. BPD KALIMANTAN TIMUR UNIT USAHA SYARIAH</option>
+												<option value="SYNAIDJ1" id="bank_list_SYNAIDJ1">PT. BANK CIMB NIAGA, TBK UNIT USAHA SYARIAH</option>
+												<option value="SYNBIDJ1" id="bank_list_SYNBIDJ1">PT. BPD NUSA TENGGARA BARAT UNIT USAHA SYARIAH</option>
+												<option value="SYNIIDJ1" id="bank_list_SYNIIDJ1">PT. BANK NEGARA INDONESIA SYARIAH</option>
+												<option value="SYONIDJ1" id="bank_list_SYONIDJ1">PT. BANK OCBC NISP, TBK UNIT USAHA SYARIAH</option>
+												<option value="SYRIIDJ1" id="bank_list_SYRIIDJ1">PT. BPD RIAU UNIT USAHA SYARIAH</option>
+												<option value="SYSBIDJ1" id="bank_list_SYSBIDJ1">PT. BPD SUMATERA BARAT UNIT USAHA SYARIAH</option>
+												<option value="SYSSIDJ1" id="bank_list_SYSSIDJ1">PT. BPD SUMATERA SELATAN DAN BANGKA BELITUNG UNIT USAHA SYARIAH</option>
+												<option value="SYSUIDJ1" id="bank_list_SYSUIDJ1">PT. BPD SUMATERA UTARA UNIT USAHA SYARIAH</option>
+												<option value="SYTBIDJ1" id="bank_list_SYTBIDJ1">PT. BANK SINARMAS UNIT USAHA SYARIAH</option>
+												<option value="SYWSIDJ1" id="bank_list_SYWSIDJ1">PT. BPD SULAWESI SELATAN DAN SULAWESI BARAT UNIT USAHA SYARIAH</option>
+												<option value="SYYKIDJ1" id="bank_list_SYYKIDJ1">PT. BPD YOGYAKARTA UNIT USAHA SYARIAH</option>
+												<option value="VICTIDJ1" id="bank_list_VICTIDJ1">PT. BANK VICTORIA INTERNASIONAL</option>
+												<option value="YUDBIDJ1" id="bank_list_YUDBIDJ1">PT. BANK YUDHA BHAKTI</option>
+											</select>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label>Nomor Rekening</label>
+											<input type="tel" class="form-control kyc-input-text" id="account_number" name="account_number" maxlength="20" required>
+											<p><i>Harap pastikan Anda telah memasukkan nomor akun yang benar, ini akan digunakan saat Anda menjual reksa dana..</i></p>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<label>Nama Rekening</label>
+											<input type="text" class="form-control kyc-input-text" id="account_name" name="account_name" maxlength="25" required>
+											<p><i>Anda hanya bisa menambahkan rekening bank yang menggunakan nama yang sama seperti di E-KTP.</i></p>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="step-4" class="">						
+								<div id="form-step-3" role="form" data-toggle="validator">
+									<div class="form-group">
+										<div class="col-sm-12 terms-div-header-col">
+											<h3>Pernyataan Persetujuan</h3>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12 terms-agree-col">
+											<h4>Dengan menandatangani ini, Saya menyatakan bahwa:</h4>
+											<ol>
+												<li>Mengisi data dengan benar dan lengkap.</li>
+												<li>Mengerti dan menyetujui <b><a href="https://pami.olmatix.com/termcondition" target="_blank">Syarat &amp; Ketentuan</a></b></li>
+												<li>Mengerti dan menyetujui <a href="https://pami.olmatix.com/privacypolicy" target="_blank">Kebijakan Privasi</a>
+												</li>
+											</ol>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<div id="terms-check" data-toggle="validator">
+												<input type="checkbox" name="agree" value="yes" class="check" id="agree" data-error="Please accept the Terms and Conditions" required>
+												<label for="kyc-agree" class="input-check-label">Saya setuju dengan Syarat &amp; Ketentuan PAMI.</label>
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group text-center">
+										<div class="col-sm-12">
+											<label class="kyc-input-label">
+												<?php echo date('d F Y'); ?>
+											</label>
 											<h4>Click to sign</h4>
-											<input type="text" id="user_sign" style="border-radius: 5px;">
+											<input type="text" id="user_sign" style="border-radius: 5px;" required>
+											<div class="help-block with-errors"></div>
+											<input type="text" id="signatureDone" name="signatureDone" hidden="">									
 										</div>
-									<div class="row" style="padding-top: 20px;">
-										<input type="text" id="signatureDone" name="signatureDone" hidden="">
-										
 										<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top:30px;">Tertanda,</div>
 										<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top:5px;" id="signature_name">
 											<?php echo $user_data[0]->name; ?>
@@ -1012,7 +1050,11 @@
 						</div>
 					</div>
 
-				</form>
+					</form>
+					</div>
+					<!-- /.box-body -->
+				</div>
+	       		 <!-- /.box -->	
 			</div>
 		</div>
     </section>
@@ -1058,7 +1100,7 @@
                     console.log("Error");
                 }
             });
-        });  
+        }); 
 
         //Initialize Select2 Elements
         $('.select2').select2();
