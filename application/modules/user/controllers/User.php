@@ -802,7 +802,23 @@ class User extends CI_Controller {
 
     public function approve_update(){
 
-        $data = $this->User_model->update_registration_status();
+        $userid = $this->session->userdata ('user_details')[0]->name;
+  		$role 	= $this->session->userdata ('user_details')[0]->user_type;
+  		$seq_id = $this->input->post('seq_id');
+       	
+       	if (strtoupper($role )=='ADMIN') {
+       		$update_code = '1';
+       	} else if (strtoupper($role )=='MANAGER') {
+       		$update_code = '2';
+       	}
+
+       	$data = array(
+                'update_user'  		=> $userid, 
+                'update_date'  		=> date('Y-m-d H:i:s'), 
+                'account_status'  	=> $update_code
+            );
+
+        $reVal = $this->User_model->update_registration_status($data);
 
         $setting = settings();
         $body = $this->User_model->get_template('approve_reject');
@@ -841,6 +857,6 @@ class User extends CI_Controller {
         $this->email->set_mailtype('html'); 
         $this->email->send();
 
-        echo json_encode($data);
+        echo json_encode($reVal);
     }
 }
