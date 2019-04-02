@@ -26,7 +26,6 @@
 
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
-
 <script src="<?php echo base_url('assets/js/jquery.form-validator.min.js');?>"></script>
 <!-- Include jQuery Validator plugin -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
@@ -42,7 +41,6 @@
 <script src="<?php echo base_url('assets/js/jquery.slimscroll.min.js');?>"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url('assets/js/fastclick.js');?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <!-- Sweet Alert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
