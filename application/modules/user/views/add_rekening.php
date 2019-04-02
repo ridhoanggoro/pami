@@ -995,12 +995,13 @@
 									<label class="kyc-input-label">
 										<?php echo date('d F Y'); ?>
 									</label>
-									<div class="row" style="padding-top: 20px;">
-										<input type="text" id="signatureDone" name="signatureDone" hidden="">
-										<div>
-											<h3>Click to sign</h3>
+									<div>
+											<h4>Click to sign</h4>
 											<input type="text" id="user_sign" style="border-radius: 5px;">
 										</div>
+									<div class="row" style="padding-top: 20px;">
+										<input type="text" id="signatureDone" name="signatureDone" hidden="">
+										
 										<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top:30px;">Tertanda,</div>
 										<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top:5px;" id="signature_name">
 											<?php echo $user_data[0]->name; ?>
@@ -1087,15 +1088,10 @@
                                         text:   "Terima kasih data anda telah berhasil di proses, mohon cek email anda untuk update status registrasi anda",
                                         icon:   "success",
 									});
-									var seconds = 3;
-									setInterval(function () {
-									seconds--;
-									$("#lblCount").html(seconds);
-									if (seconds == 0) {
-											$("#dvCountDown").hide();
-											window.location = "<?php echo base_url(); ?>user/profile";
-										}
-									}, 1000);
+									
+									setTimeout(function(){
+										window.location.href = '<?php echo base_url(); ?>user/profile';
+									}, 5000);
                                 },
                              error: function() {
                                     alert('Error occured');
@@ -1132,8 +1128,6 @@
 
         $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
             var elmForm = $("#form-step-" + stepNumber);
-            // stepDirection === 'forward' :- this condition allows to do the form validation
-            // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
             if(stepDirection === 'forward' && elmForm){
                 elmForm.validator('validate');
                 var elmErr = elmForm.children('.has-error');
@@ -1163,8 +1157,7 @@
             height: '150px',
             callback: function (data, action) {
                 console.log(data);
-                $("#signatureDone").val(data);
-                //alert(data);
+                $("#signatureDone").val(data);                
             }
         });   
         
