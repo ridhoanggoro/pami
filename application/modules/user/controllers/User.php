@@ -807,11 +807,13 @@ class User extends CI_Controller {
   		$seq_id = $this->input->post('seq_id');
        	
        	if (strtoupper($role )=='ADMIN') {
-       		$update_code = '1';
+               $update_code = '1';
+               $reg_status = 'Approved by Admin';
        	} else if (strtoupper($role )=='MANAGER') {
-       		$update_code = '2';
-       	}
-
+               $update_code = '2';
+               $reg_status = 'Approved by Manager';
+       	}   
+           
        	$data = array(
                 'update_user'  		=> $userid, 
                 'update_date'  		=> date('Y-m-d H:i:s'), 
@@ -824,11 +826,12 @@ class User extends CI_Controller {
         $body = $this->User_model->get_template('approve_reject');
         $data = array(
             'user_name' => $username,
-            'e_ktp' => $this->input->post('id_number'),
-            'ttl' => $dob_date.'-'.$dob_month.'-'.$dob_years,
-            'alamat' => $this->input->post('ktp_address'),
+            'e_ktp' => $this->input->post('e_ktp'),
+            'ttl' => $this->input->post('dob'),
+            'alamat' => $this->input->post('alamat'),
             'sender_name' => $setting['company_name'],
-            'website_name' => $setting['company_name']
+            'website_name' => $setting['company_name'],
+            'status' => $reg_status
             );
         $body = $body->html;
         foreach ($data as $key => $value) {
@@ -851,7 +854,7 @@ class User extends CI_Controller {
 
         $this->email->to($email_address);
         $this->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
-        $this->email->subject('Informasi Pembukaan Rekening');
+        $this->email->subject('Informasi Status Pembukaan Rekening');
 
         $this->email->message($body);  
         $this->email->set_mailtype('html'); 
