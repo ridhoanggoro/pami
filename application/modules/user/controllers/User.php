@@ -422,12 +422,12 @@ class User extends CI_Controller {
                 $checkValue = $this->User_model->check_exists('users','email',$this->input->post('email'));
                 if($checkValue==false)  {  
                     $this->session->set_flashdata('messagePr', 'This Email Already Registered with us..');
-                    redirect( base_url().'user/userTable', 'refresh');
+                    redirect( base_url().'user/registration', 'refresh');
                 }
                 $checkValue1 = $this->User_model->check_exists('users','name',$this->input->post('name'));
                 if($checkValue1==false) {  
                     $this->session->set_flashdata('messagePr', 'Username Already Registered with us..');
-                    redirect( base_url().'user/userTable', 'refresh');
+                    redirect( base_url().'user/registration', 'refresh');
                 }
                 $data['status'] = 'active';
                 if(setting_all('admin_approval') == 1) {
