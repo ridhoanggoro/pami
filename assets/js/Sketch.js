@@ -254,7 +254,7 @@
             big_pad.css('border', '1px solid #c8c8c8');
             big_pad.css('padding', '15px');
             big_pad.css('background-color', 'white');
-            big_pad.css('margin-top', '15px');
+            big_pad.css('margin-top', '20%');
             big_pad.css('width', '30%');
             big_pad.css('height', '40%');
             big_pad.css('border-radius', '10px');
