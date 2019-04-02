@@ -821,7 +821,7 @@ class User extends CI_Controller {
                 'account_status'  	=> $update_code
             );
 
-        $reVal = $this->User_model->update_registration_status($data);
+        $reVal = $this->User_model->update_registration_status($data, $seq_id);
 
         $setting = settings();
         $body = $this->User_model->get_template('approve_reject');
