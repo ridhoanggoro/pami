@@ -21,10 +21,10 @@
 					<!-- SmartWizard html -->
 					<div id="smartwizard">
 						<ul>
-							<li><a href="#step-1">Step 1<br /><small>Data Diri</small></a></li>
-							<li><a href="#step-2">Step 2<br /><small>Penghasilan</small></a></li>
-							<li><a href="#step-3">Step 3<br /><small>Rekening Bank </small></a></li>
-							<li><a href="#step-4">Step 4<br /><small>Pernyataan Persetujuan</small></a></li>
+							<li><a href="#step-1">Step 1<br />Data Diri</a></li>
+							<li><a href="#step-2">Step 2<br />Penghasilan</a></li>
+							<li><a href="#step-3">Step 3<br />Rekening Bank </a></li>
+							<li><a href="#step-4">Step 4<br />Pernyataan Persetujuan</a></li>
 						</ul>
 
 						<div>
