@@ -163,9 +163,9 @@ class User_model extends CI_Model {
   		return $query;
   	}
 
-  	public function update_registration_status($data)
+  	public function update_registration_status($data, $key)
   	{
-        $this->db->where('seq_id', $seq_id);
+        $this->db->where('seq_id',  $key);
 		$result = $this->db->update('user_account_info', $data);
         return $result;
     }
