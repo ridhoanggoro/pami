@@ -265,13 +265,14 @@ class User extends CI_Controller {
         if(!isset($id) || $id == '') {
             $id = $this->session->userdata ('user_details')[0]->users_id;
         }
-        $data['reg_stat']   = $this->User_model->get_registration_status('ALL');
+        $reg_count          = $this->User_model->get_registration_status('ALL');
+        $data['reg_stat']   = $reg_count->num_rows();        
         $data['user_data']  = $this->User_model->get_users($id);
         $reg_stat = $this->User_model->get_registration_status($id);
         if ($reg_stat->num_rows() > 0) {
             $data['registrasi_info'] = 'Anda sudah melakukan registrasi rekening, saat ini sedang dalam proses verifikasi';
         }
-        $this->load->view('include/header'); 
+        $this->load->view('include/header', $data); 
         $this->load->view('profile', $data);
         $this->load->view('include/footer');
     }
