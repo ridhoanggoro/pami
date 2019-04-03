@@ -863,4 +863,17 @@ class User extends CI_Controller {
 
         echo json_encode($reVal);
     }
+
+    public function check_exists()
+    {
+        $ktp_id = $this->input->post('ktp_no');
+        if($this->User_model->ktp_verify($ktp_id))  
+            {  
+                echo '<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> ID KTP sudah terdaftar</label>';  
+            }  
+            else  
+            {  
+                echo '<label class="text-success"><span class="glyphicon glyphicon-ok"></span> ID KTP Available</label>';  
+            } 
+    }
 }

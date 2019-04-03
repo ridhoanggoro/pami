@@ -35,7 +35,7 @@
 										<div class="col-sm-12">
 											<label class="input-label">Nomor E-KTP</label>
 											<input id="id_number" name="id_number" maxlength="16" class="form-control input-text" placeholder="Masukkan Nomor E-KTP kamu" required>
-											<div class="help-block with-errors"></div>
+											<div id="ktp_check_result" class="help-block with-errors"></div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -48,9 +48,10 @@
 									<div class="form-group">
 										<div class="col-sm-12">
 										<label for="exampleInputFile">Upload Foto KTP</label>
-										<div class="dropzone">
-											<div class="dz-message">
+										<div class="dropzone dz-clickable">
+											<div class="dz-default dz-message">
 												<h3> Klik atau Drop Foto disini</h3>
+												<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>
 											</div>
 										</div>
 										<p class="help-block"><i>pastikan foto jelas dapat terbaca dan ukuran foto tidak lebih dari 10MB</i></p>
@@ -76,80 +77,78 @@
 									</div>
 
 									<div class="form-group">
-										<div class="col-sm-12">
-											<label class="input-label">Tempat Lahir</label>
-											<input id="place_of_birth" name="place_of_birth" maxlength="100" type="text" class="mandatory form-control input-text" placeholder="Masukkan Tempat Lahir kamu">
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>Tanggal</label>
+											<select id="dob-date" name="dob-date" class="form-control input-select input-dob-date" required>
+												<option id="opt_00" value="" disabled="" selected="">DD</option>
+												<option id="opt_1" value="01">01</option>
+												<option id="opt_2" value="02">02</option>
+												<option id="opt_3" value="03">03</option>
+												<option id="opt_4" value="04">04</option>
+												<option id="opt_5" value="05">05</option>
+												<option id="opt_6" value="06">06</option>
+												<option id="opt_7" value="07">07</option>
+												<option id="opt_8" value="08">08</option>
+												<option id="opt_9" value="09">09</option>
+												<option id="opt_10" value="10">10</option>
+												<option id="opt_11" value="11">11</option>
+												<option id="opt_12" value="12">12</option>
+												<option id="opt_13" value="13">13</option>
+												<option id="opt_14" value="14">14</option>
+												<option id="opt_15" value="15">15</option>
+												<option id="opt_16" value="16">16</option>
+												<option id="opt_17" value="17">17</option>
+												<option id="opt_18" value="18">18</option>
+												<option id="opt_19" value="19">19</option>
+												<option id="opt_20" value="20">20</option>
+												<option id="opt_21" value="21">21</option>
+												<option id="opt_22" value="22">22</option>
+												<option id="opt_23" value="23">23</option>
+												<option id="opt_24" value="24">24</option>
+												<option id="opt_25" value="25">25</option>
+												<option id="opt_26" value="26">26</option>
+												<option id="opt_27" value="27">27</option>
+												<option id="opt_28" value="28">28</option>
+												<option id="opt_29" value="29">29</option>
+												<option id="opt_30" value="30">30</option>
+												<option id="opt_31" value="31">31</option>
+											</select>
 											<div class="help-block with-errors"></div>
 										</div>
-									</div>
-
-									<div class="form-group">
-										<div class="col-md-6 col-sm-12">
-											<label class="input-label">Tanggal Lahir</label>
-											<input id="date_of_birth" readonly="" name="date_of_birth" maxlength="15" type="hidden" class="mandatory form-control input-text hasDatepicker" placeholder="Masukkan Tanggal Lahir kamu">
-
-											<div class="form-group" id="dob-input">
-												<div class="col-xs-4">
-													<select id="dob-date" name="dob-date" class="form-control input-select input-dob-date">
-														<option id="opt_00" value="" disabled="" selected="">DD</option>
-														<option id="opt_1" value="01">01</option>
-														<option id="opt_2" value="02">02</option>
-														<option id="opt_3" value="03">03</option>
-														<option id="opt_4" value="04">04</option>
-														<option id="opt_5" value="05">05</option>
-														<option id="opt_6" value="06">06</option>
-														<option id="opt_7" value="07">07</option>
-														<option id="opt_8" value="08">08</option>
-														<option id="opt_9" value="09">09</option>
-														<option id="opt_10" value="10">10</option>
-														<option id="opt_11" value="11">11</option>
-														<option id="opt_12" value="12">12</option>
-														<option id="opt_13" value="13">13</option>
-														<option id="opt_14" value="14">14</option>
-														<option id="opt_15" value="15">15</option>
-														<option id="opt_16" value="16">16</option>
-														<option id="opt_17" value="17">17</option>
-														<option id="opt_18" value="18">18</option>
-														<option id="opt_19" value="19">19</option>
-														<option id="opt_20" value="20">20</option>
-														<option id="opt_21" value="21">21</option>
-														<option id="opt_22" value="22">22</option>
-														<option id="opt_23" value="23">23</option>
-														<option id="opt_24" value="24">24</option>
-														<option id="opt_25" value="25">25</option>
-														<option id="opt_26" value="26">26</option>
-														<option id="opt_27" value="27">27</option>
-														<option id="opt_28" value="28">28</option>
-														<option id="opt_29" value="29">29</option>
-														<option id="opt_30" value="30">30</option>
-														<option id="opt_31" value="31">31</option>
-													</select>
-												</div>
-												<div class="col-xs-4 input-dob-month-div">
-													<select class="form-control input-select" id="dob-month" name="dob-month">
-														<option id="opt_month_0" value="" disabled="" selected="">Bulan</option>
-														<option id="opt_month_1" value="01">Jan</option>
-														<option id="opt_month_2" value="02">Feb</option>
-														<option id="opt_month_3" value="03">Mar</option>
-														<option id="opt_month_4" value="04">Apr</option>
-														<option id="opt_month_5" value="05">May</option>
-														<option id="opt_month_6" value="06">Jun</option>
-														<option id="opt_month_7" value="07">Jul</option>
-														<option id="opt_month_8" value="08">Aug</option>
-														<option id="opt_month_9" value="09">Sep</option>
-														<option id="opt_month_10" value="10">Oct</option>
-														<option id="opt_month_11" value="11">Nov</option>
-														<option id="opt_month_12" value="12">Dec</option>
-													</select>
-													<div class="help-block with-errors"></div>
-												</div>
-												<div class="col-xs-4">
-													<input type="number" class="form-control input-text input-dob-year" placeholder="YYYY" maxlength="4" id="dob-year" name="dob-year">
-												</div>
-											</div>
-											<!-- <input type="text" id="dob-input" class="mandatory form-control input-text dob-input" placeholder="DD-MM-YYYY"> -->
+										</div>
+										<!-- /.col -->
+										<div class="col-md-4">
+										<div class="form-group">
+											<label> Bulan</label>
+											<select class="form-control input-select" id="dob-month" name="dob-month" required>
+												<option id="opt_month_0" value="" disabled="" selected="">Bulan</option>
+												<option id="opt_month_1" value="01">Jan</option>
+												<option id="opt_month_2" value="02">Feb</option>
+												<option id="opt_month_3" value="03">Mar</option>
+												<option id="opt_month_4" value="04">Apr</option>
+												<option id="opt_month_5" value="05">May</option>
+												<option id="opt_month_6" value="06">Jun</option>
+												<option id="opt_month_7" value="07">Jul</option>
+												<option id="opt_month_8" value="08">Aug</option>
+												<option id="opt_month_9" value="09">Sep</option>
+												<option id="opt_month_10" value="10">Oct</option>
+												<option id="opt_month_11" value="11">Nov</option>
+												<option id="opt_month_12" value="12">Dec</option>
+											</select>
+											<div class="help-block with-errors"></div>
 										</div>
 										
+										</div>
+										<!-- /.col -->
+										<!-- /.col -->
+										<div class="col-md-4">
+											<div class="form-group">
+												<label> Tahun</label>
+												<input type="text" class="form-control input-text input-dob-year" placeholder="YYYY" maxlength="4" id="dob-year" name="dob-year" required>
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
 									</div>
 
 									<div class="form-group">
@@ -220,7 +219,6 @@
 											<div class="help-block with-errors"></div>
 										</div>
 									</div>
-
 									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="input-label">Alamat di E-KTP</label>
@@ -1024,7 +1022,7 @@
 									<div class="form-group">
 										<div class="col-sm-12">
 											<div id="terms-check" data-toggle="validator">
-												<input type="checkbox" name="agree" value="yes" class="check" id="agree" data-error="Please accept the Terms and Conditions" required>
+												<input type="checkbox" class="flat-red" name="agree" value="yes" class="check" id="agree" data-error="Please accept the Terms and Conditions" required>
 												<label for="kyc-agree" class="input-check-label">Saya setuju dengan Syarat &amp; Ketentuan PAMI.</label>
 												<div class="help-block with-errors"></div>
 											</div>
@@ -1062,6 +1060,21 @@
 <script type="text/javascript">  
     
     $(document).ready(function(){
+		$('#id_number').change(function(){  
+           var id_no = $('#id_number').val();  
+           if(id_no != '')  
+           {  
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>user/check_exists",  
+                     method:"POST",  
+                     data:{ktp_no:id_no},  
+                     success:function(data){  
+                          $('#ktp_check_result').html(data);  
+                     }  
+                });  
+           }  
+      	});
+
         Dropzone.autoDiscover = false;
         var foto_upload = new Dropzone(".dropzone",
         {
@@ -1115,7 +1128,11 @@
                         elmForm.validator('validate');
                         var elmErr = elmForm.find('.has-error');
                         if(elmErr && elmErr.length > 0){
-                            alert('Oops we still have error in the form');
+                            swal({
+									title:  "Form Belum Lengkap!",
+									text:   "Mohon dilengkapi form isian berikut",
+									icon:   "error",
+								});
                             return false;
                         }else{
                             dataString = $("#myForm").serialize();
@@ -1149,8 +1166,6 @@
                                                 $('#smartwizard').smartWizard("reset");
                                                 $('#myForm').find("input, textarea").val("");
                                             });
-
-
 
         // Smart Wizard
         $('#smartwizard').smartWizard({

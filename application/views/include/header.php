@@ -27,7 +27,8 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/css/smart_wizard_theme_arrows.css');?>">
   <!-- Dropzone Upload -->
   <link href='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.css' type='text/css' rel='stylesheet'>
-
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendor/iCheck/all.css');?>">
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/vendor/select2/dist/css/select2.min.css');?>">
   <!-- Theme style -->
@@ -90,7 +91,7 @@
                             <ul class="menu">
                               <li>
                                 <a href="<?php echo base_url("user/registered_list"); ?>">
-                                  <i class="fa fa-users text-aqua"></i> <?php echo $reg_stat;?> new members need approval
+                                  <i class="fa fa-check-square-o text-aqua"></i> <?php echo $reg_stat;?> new members need approval
                                 </a>
                               </li>                             
                               <li>

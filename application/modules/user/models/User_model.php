@@ -168,6 +168,22 @@ class User_model extends CI_Model {
         $this->db->where('seq_id',  $key);
 		$result = $this->db->update('user_account_info', $data);
         return $result;
-    }
+	}
+	
+	/**
+      * This function is used to check ktp is available or not 
+      */
+	function ktp_verify($param) {    
+		$this->db->where('e_ktp_no', $param);  
+		$query = $this->db->get("user_account_info");  
+		if($query->num_rows() > 0)  
+		{  
+			return true;  
+		}  
+		else  
+		{  
+			return false;  
+		}  
+	}
 
 }
