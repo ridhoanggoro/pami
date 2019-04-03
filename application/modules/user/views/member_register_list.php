@@ -95,7 +95,7 @@
                   </div>                                    
                 </form>
               </div>
-              <input type="text" hidden="" class="form-control" id="user_type" name="user_type" value="<?php echo $this->session->userdata ('user_details')[0]->user_type; ?>"/>
+              <input type="hidden" class="form-control" id="user_type" name="user_type" value="<?php echo $this->session->userdata ('user_details')[0]->user_type; ?>"/>
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

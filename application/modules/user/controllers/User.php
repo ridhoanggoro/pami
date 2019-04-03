@@ -26,7 +26,7 @@ class User extends CI_Controller {
     	if(isset($_SESSION['user_details'])){
     		redirect( base_url().'user/dashboard_user', 'refresh');
     	}   
-    	$this->load->view('include/script');
+    	//$this->load->view('include/script');
         $this->load->view('login'); 
     }
 
