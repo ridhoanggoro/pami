@@ -11,9 +11,8 @@ class About extends CI_Controller {
      * @return Void
      */
   public function index(){   
-	$this->load->view("include/header");
+	  $this->load->view("include/header");
     $this->load->view("index");
     $this->load->view("include/footer");
   }
 }
-?>

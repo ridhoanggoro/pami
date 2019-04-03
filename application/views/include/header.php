@@ -146,13 +146,13 @@
                 
                 <?php if(isset($this->session->userdata('user_details')[0]->user_type) && $this->session->userdata('user_details')[0]->user_type == 'Member'){ ?>
                 <li class="<?=($this->router->method==="overview")?"active":"not-active"?>"> 
-                <a href="<?php echo base_url('user/overview');?>"> <i class="fa fa-line-chart"></i> <span>Overview</span></a>
+                <a href="<?php echo base_url('trx/overview');?>"> <i class="fa fa-line-chart"></i> <span>Overview</span></a>
                 </li> 
                 <li class="<?=($this->router->method==="transaksi")?"active":"not-active"?>"> 
-                <a href="<?php echo base_url('user/trx');?>"> <i class="fa fa-exchange"></i> <span>Transaksi</span></a>
+                <a href="<?php echo base_url('trx');?>"> <i class="fa fa-exchange"></i> <span>Transaksi</span></a>
                 </li>      
                 <li class="<?=($this->router->method==="portfolio")?"active":"not-active"?> treeview"> 
-                <a href="<?php echo base_url('user/portfolio');?>"> <i class="fa fa-history"></i> <span>Portofolio</span></a>
+                <a href="<?php echo base_url('trx/portfolio');?>"> <i class="fa fa-history"></i> <span>Portofolio</span></a>
                 </li>  
                 <?php  $reg_stat = $this->User_model->is_registered($this->session->userdata('user_details')[0]->users_id);
                 if ($reg_stat->num_rows() === 0) { ?>
