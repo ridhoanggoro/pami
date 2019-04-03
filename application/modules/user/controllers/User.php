@@ -804,6 +804,7 @@ class User extends CI_Controller {
     public function approve_update(){
 
         $userid = $this->session->userdata ('user_details')[0]->name;
+        $email_address = $this->input->post('email');
   		$role 	= $this->session->userdata ('user_details')[0]->user_type;
   		$seq_id = $this->input->post('seq_id');
        	
@@ -812,7 +813,7 @@ class User extends CI_Controller {
                $reg_status = 'Approved by Admin';
        	} else if (strtoupper($role )=='MANAGER') {
                $update_code = '2';
-               $reg_status = 'Approved by Manager';
+               $reg_status = 'Approved by Manager, Saat ini anda sudah dapat melakukan transaksi';
        	}   
            
        	$data = array(

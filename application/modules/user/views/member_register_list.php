@@ -96,6 +96,7 @@
                 </form>
               </div>
               <input type="hidden" class="form-control" id="user_type" name="user_type" value="<?php echo $this->session->userdata ('user_details')[0]->user_type; ?>"/>
+              <input type="hidden" class="form-control" id="email_edit" name="email_edit"/>
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -132,7 +133,7 @@
                                         '<td>'+data[i].rekening_bank_no+'</td>'+
                                         '<td><span class="label label-success">Pending Manager Approval</span></td>'+
                                         '<td style="text-align:right;">'+
-                                            '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="'+data[i].seq_id+'" data-nama="'+data[i].name+'" data-e_ktp_no="'+data[i].e_ktp_no+'"data-tanggal_lahir="'+data[i].tanggal_lahir+'"data-rekening_bank_no="'+data[i].rekening_bank_no+'"data-profile_pic="'+data[i].profile_pic+'"data-alamat="'+data[i].alamat+'"><i class="fa fa-search"></i></a>'+
+                                            '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="'+data[i].seq_id+'" data-nama="'+data[i].name+'" data-e_ktp_no="'+data[i].e_ktp_no+'"data-tanggal_lahir="'+data[i].tanggal_lahir+'"data-rekening_bank_no="'+data[i].rekening_bank_no+'"data-profile_pic="'+data[i].profile_pic+'"data-alamat="'+data[i].alamat+'"data-email="'+data[i].email+'"><i class="fa fa-search"></i></a>'+
                                         '</td>'+
                                     '</tr>';
                         }
@@ -146,7 +147,7 @@
                                         '<td>'+data[i].rekening_bank_no+'</td>'+
                                         '<td><span class="label label-warning">Pending Admin Approval</span></td>'+
                                         '<td style="text-align:right;">'+
-                                            '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="'+data[i].seq_id+'" data-nama="'+data[i].name+'" data-e_ktp_no="'+data[i].e_ktp_no+'"data-tanggal_lahir="'+data[i].tanggal_lahir+'"data-rekening_bank_no="'+data[i].rekening_bank_no+'"data-profile_pic="'+data[i].profile_pic+'"data-alamat="'+data[i].alamat+'"><i class="fa fa-search"></i></a>'+
+                                            '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="'+data[i].seq_id+'" data-nama="'+data[i].name+'" data-e_ktp_no="'+data[i].e_ktp_no+'"data-tanggal_lahir="'+data[i].tanggal_lahir+'"data-rekening_bank_no="'+data[i].rekening_bank_no+'"data-profile_pic="'+data[i].profile_pic+'"data-alamat="'+data[i].alamat+'"data-email="'+data[i].email+'"><i class="fa fa-search"></i></a>'+
                                         '</td>'+
                                     '</tr>';
                         }
@@ -168,14 +169,16 @@
             var nama            = $(this).data('nama');
             var alamat          = $(this).data('alamat');
             var ttl             = $(this).data('tanggal_lahir');
-            var profil_pic      = $(this).data('profile_pic');            
+            var profil_pic      = $(this).data('profile_pic');    
+            var email           = $(this).data('email'); 
              
             $('#Modal_Edit').modal('show');
             $('[name="seq_id"]').val(seq_id);
             $('[name="e_ktp_no_edit"]').val(no_ektp);
             $('[name="nama_edit"]').val(nama);
             $('[name="alamat_edit"]').val(alamat);
-            $('[name="ttl_edit"]').val(ttl);         
+            $('[name="ttl_edit"]').val(ttl);  
+            $('[name="email_edit"]').val(email);         
             $('#profil_image').attr('src',"<?php echo site_url('/assets/images/') ?>" + profil_pic);           
         });
 
@@ -186,12 +189,13 @@
             var e_ktp          = $('#e_ktp_no_edit').val();
             var dob            = $('#ttl_edit').val();
             var alamat         = $('#alamat_edit').val();
+            var email          = $('#email_edit').val();
 
             $.ajax({
                 type : "POST",
                 url  : "<?php echo site_url('user/approve_update')?>",
                 dataType : "JSON",
-                data : {seq_id:seq_id, e_ktp:e_ktp, dob:dob, alamat:alamat},
+                data : {seq_id:seq_id, e_ktp:e_ktp, dob:dob, alamat:alamat, email:email},
                 success: function(data){
                     $('#Modal_Edit').modal('hide');
                     swal({
