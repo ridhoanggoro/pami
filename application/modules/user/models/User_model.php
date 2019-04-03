@@ -151,8 +151,8 @@ class User_model extends CI_Model {
   				$param = array('user_account_info.account_status' => 1);
   			}
   			  
-		} else { 
-			$param = array('user_account_info.users_id' => $id, 'user_account_info.account_status' => 0); 
+		} else {
+			$param = array('user_account_info.users_id' => $id, 'user_account_info.account_status !=' => 2); 
 		}
   				
 		$this->db->select('*');
@@ -161,7 +161,18 @@ class User_model extends CI_Model {
 		$this->db->where($param);
   		$query = $this->db->get();
   		return $query;
-  	}
+	  }
+	  
+	public function is_registered($id)
+	{
+		$param = array('user_account_info.users_id' => $id); 
+		$this->db->select('*');
+		$this->db->from('user_account_info');
+		$this->db->join('users', 'user_account_info.users_id=users.users_id');
+		$this->db->where($param);
+  		$query = $this->db->get();
+  		return $query;
+	}
 
   	public function update_registration_status($data, $key)
   	{
