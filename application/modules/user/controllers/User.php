@@ -664,8 +664,7 @@ class User extends CI_Controller {
         {
             $upload_data        = $this->upload->data();
             $token              = $this->input->post('token_foto');
-            $nama_file          = $this->upload->data('file_name');
-            
+            $nama_file          = $this->upload->data('file_name');            
             $this->db->insert('file_upload',array('nama_file'=>$nama_file ,'unique_id'=>$token));
         }
     }

@@ -139,12 +139,12 @@
               <ul class="sidebar-menu">
                 <li class="header"><!-- MAIN NAVIGATION --></li>
                 <?php //echo '<pre>';print_r($this->router); die; ?>
+               
                 <li class="<?=($this->router->method==="profile")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('user/profile');?>"> <i class="fa fa-desktop"></i><span>My Account</span></a>
                 </li>        
                 <?php $this->load->view("include/menu");?> 
-                
-                <?php if(isset($this->session->userdata('user_details')[0]->user_type) && $this->session->userdata('user_details')[0]->user_type == 'Member'){ ?>
+                <?php if(isset($this->session->userdata('user_details')[0]->user_type) && $this->session->userdata('user_details')[0]->user_type == 'Member'): ?>
                 <li class="<?=($this->router->method==="overview")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('trx/overview');?>"> <i class="fa fa-line-chart"></i> <span>Overview</span></a>
                 </li> 
@@ -153,40 +153,25 @@
                 </li>      
                 <li class="<?=($this->router->method==="portfolio")?"active":"not-active"?> treeview"> 
                 <a href="<?php echo base_url('trx/portfolio');?>"> <i class="fa fa-history"></i> <span>Portofolio</span></a>
-                </li>  
+                </li>
                
-               <?php } ?>
-              
-               <?php if(CheckPermission("user", "own_read")){ ?>
-                    <li class="<?=($this->router->method==="userTable")?"active":"not-active"?>"> 
-                        <a href="<?php echo base_url();?>user/userTable"> <i class="fa fa-users"></i> <span>Users</span></a>
-                    </li>    
-                <?php }  if(isset($this->session->userdata('user_details')[0]->user_type) && $this->session->userdata('user_details')[0]->user_type == 'admin'){ ?>    
-                    <li class="<?=($this->router->class==="setting")?"active":"not-active"?>">
-                        <a href="<?php echo base_url("setting"); ?>"><i class="fa fa-cogs"></i> <span>Settings</span></a>
-                    </li>
-					          <li class="<?=($this->router->class==="product")?"active":"not-active"?>">
-                        <a href="<?php echo base_url("product"); ?>"><i class="fa fa-book"></i><span>Product</span></a>
-                    </li>
-                    <li class="<?=($this->router->class==="new_registered_member")?"active":"not-active"?>">
-                        <a href="<?php echo base_url("user/registered_list"); ?>"><i class="fa fa-user-plus"></i><span>Member Register List</span></a>
-                    </li>
-                    <!-- <li class="<?php //echo ($this->router->class==="Templates")?"active":"not-active"?>">
-                        <a href="<?php //echo base_url("Templates"); ?>"><i class="fa fa-cubes"></i> <span>Templates</span></a>
-                    </li> -->
-                  <?php }  /*if(CheckPermission("invoice", "own_read")){ ?>   
-                    <li class="<?=($this->router->class==="invoice")?"active":"not-active"?>">
-                        <a href="<?php echo base_url("invoice/view"); ?>"><i class="fa fa-list-alt"></i> <span>Invoice</span></a>
-                    </li>
-               <?php  }*/ ?>
-               <?php  if(isset($this->session->userdata('user_details')[0]->user_type) && $this->session->userdata('user_details')[0]->user_type == 'Manager'){ ?>
-                  <li class="<?=($this->router->class==="new_registered_member")?"active":"not-active"?>">
-                      <a href="<?php echo base_url("user/registered_list"); ?>"><i class="fa fa-user-plus"></i><span>Member Register List</span></a>
-                  </li>
-                    <?php } ?>
-                  <li class="<?=($this->router->class==="about")?"active":"not-active"?>">
-                      <a href="<?php echo base_url("about"); ?>"><i class="fa fa-info-circle"></i> <span>About Us</span></a>
-                  </li>
+                <?php elseif($this->session->userdata('user_details')[0]->user_type==='Manager' && $this->session->userdata('user_details')[0]->user_type === 'admin'):?>
+                <li class="<?=($this->router->method==="userTable")?"active":"not-active"?>"> 
+                  <a href="<?php echo base_url();?>user/userTable"> <i class="fa fa-users"></i> <span>Users</span></a>
+                </li>
+                <li class="<?=($this->router->class==="setting")?"active":"not-active"?>">
+                  <a href="<?php echo base_url("setting"); ?>"><i class="fa fa-cogs"></i> <span>Settings</span></a>
+                </li>
+                      <li class="<?=($this->router->class==="product")?"active":"not-active"?>">
+                  <a href="<?php echo base_url("product"); ?>"><i class="fa fa-book"></i><span>Product</span></a>
+                </li>
+                <li class="<?=($this->router->class==="new_registered_member")?"active":"not-active"?>">
+                  <a href="<?php echo base_url("user/registered_list"); ?>"><i class="fa fa-user-plus"></i><span>Member Register List</span></a>
+                </li>
+                <li class="<?=($this->router->class==="about")?"active":"not-active"?>">
+                  <a href="<?php echo base_url("about"); ?>"><i class="fa fa-info-circle"></i> <span>About Us</span></a>
+                </li>
+                <?php endif;?>
               </ul>
             </section>
             <!-- /.sidebar -->
