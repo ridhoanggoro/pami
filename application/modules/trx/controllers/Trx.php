@@ -25,4 +25,12 @@ class Trx extends CI_Controller {
         $this->load->view('portfolio', $data);
         $this->load->view('include/footer');
     }
+
+    public function overview($id='')
+    {
+        $data['user_data'] = '';
+        $this->load->view('include/header'); 
+        $this->load->view('overview', $data);
+        $this->load->view('include/footer');
+    }
 }
