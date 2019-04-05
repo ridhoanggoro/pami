@@ -138,8 +138,7 @@
               
               <ul class="sidebar-menu">
                 <li class="header"><!-- MAIN NAVIGATION --></li>
-                <?php //echo '<pre>';print_r($this->router); die; ?>
-               
+                <?php //echo '<pre>';print_r($this->router); die; ?>                              
                 <li class="<?=($this->router->method==="profile")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('user/profile');?>"> <i class="fa fa-desktop"></i><span>My Account</span></a>
                 </li>        
@@ -148,16 +147,12 @@
                 <li class="<?=($this->router->method==="overview")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('trx/overview');?>"> <i class="fa fa-line-chart"></i> <span>Overview</span></a>
                 </li> 
-                <li class="<?=($this->router->method==="transaksi")?"active":"not-active"?>"> 
+                <li class="<?=($this->router->method==="trx")?"active":"not-active"?>"> 
                 <a href="<?php echo base_url('trx');?>"> <i class="fa fa-exchange"></i> <span>Transaksi</span></a>
                 </li>      
                 <li class="<?=($this->router->method==="portfolio")?"active":"not-active"?> treeview"> 
                 <a href="<?php echo base_url('trx/portfolio');?>"> <i class="fa fa-history"></i> <span>Portofolio</span></a>
-                </li>
-                <?php elseif($this->session->userdata('user_details')[0]->user_type==='Member' && $this->session->userdata('user_details')[0]->user_type === 'admin'):?>
-                <li class="<?=($this->router->method==="rekening")?"active":"not-active"?>"> 
-                  <a href="<?php echo base_url('user/registrasi');?>"> <i class="fa fa-credit-card"></i> <span>Registrasi Rekening</span></a>
-                  </li>               
+                </li>                             
                 <?php elseif($this->session->userdata('user_details')[0]->user_type==='Manager' && $this->session->userdata('user_details')[0]->user_type === 'admin'):?>
                 <li class="<?=($this->router->method==="userTable")?"active":"not-active"?>"> 
                   <a href="<?php echo base_url();?>user/userTable"> <i class="fa fa-users"></i> <span>Users</span></a>
@@ -165,16 +160,22 @@
                 <li class="<?=($this->router->class==="setting")?"active":"not-active"?>">
                   <a href="<?php echo base_url("setting"); ?>"><i class="fa fa-cogs"></i> <span>Settings</span></a>
                 </li>
-                      <li class="<?=($this->router->class==="product")?"active":"not-active"?>">
+                <li class="<?=($this->router->class==="product")?"active":"not-active"?>">
                   <a href="<?php echo base_url("product"); ?>"><i class="fa fa-book"></i><span>Product</span></a>
                 </li>
-                <li class="<?=($this->router->class==="new_registered_member")?"active":"not-active"?>">
+                <li class="<?=($this->router->class==="registered_list")?"active":"not-active"?>">
                   <a href="<?php echo base_url("user/registered_list"); ?>"><i class="fa fa-user-plus"></i><span>Member Register List</span></a>
                 </li>
                 <li class="<?=($this->router->class==="about")?"active":"not-active"?>">
                   <a href="<?php echo base_url("about"); ?>"><i class="fa fa-info-circle"></i> <span>About Us</span></a>
                 </li>
-                <?php endif;?>
+                
+                <?php $stat = $this->User_model->is_registered($this->session->userdata('user_details')[0]->users_id);                 
+                elseif($stat->num_rows() === 0):?>
+                <li class="<?=($this->router->method==="registrasi")?"active":"not-active"?>"> 
+                  <a href="<?php echo base_url('user/registrasi');?>"> <i class="fa fa-credit-card"></i> <span>Registrasi Rekening</span></a>
+                </li>
+                <?php endif;?>                
               </ul>
             </section>
             <!-- /.sidebar -->
