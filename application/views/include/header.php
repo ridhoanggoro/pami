@@ -154,7 +154,10 @@
                 <li class="<?=($this->router->method==="portfolio")?"active":"not-active"?> treeview"> 
                 <a href="<?php echo base_url('trx/portfolio');?>"> <i class="fa fa-history"></i> <span>Portofolio</span></a>
                 </li>
-               
+                <?php elseif($this->session->userdata('user_details')[0]->user_type==='Member' && $this->session->userdata('user_details')[0]->user_type === 'admin'):?>
+                <li class="<?=($this->router->method==="rekening")?"active":"not-active"?>"> 
+                  <a href="<?php echo base_url('user/registrasi');?>"> <i class="fa fa-credit-card"></i> <span>Registrasi Rekening</span></a>
+                  </li>               
                 <?php elseif($this->session->userdata('user_details')[0]->user_type==='Manager' && $this->session->userdata('user_details')[0]->user_type === 'admin'):?>
                 <li class="<?=($this->router->method==="userTable")?"active":"not-active"?>"> 
                   <a href="<?php echo base_url();?>user/userTable"> <i class="fa fa-users"></i> <span>Users</span></a>
