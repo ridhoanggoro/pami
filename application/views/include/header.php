@@ -153,7 +153,7 @@
                 <li class="<?=($this->router->method==="portfolio")?"active":"not-active"?> treeview"> 
                 <a href="<?php echo base_url('trx/portfolio');?>"> <i class="fa fa-history"></i> <span>Portofolio</span></a>
                 </li>                             
-                <?php elseif($this->session->userdata('user_details')[0]->user_type==='Manager' && $this->session->userdata('user_details')[0]->user_type === 'admin'):?>
+                <?php elseif($this->session->userdata('user_details')[0]->user_type==='Manager' || $this->session->userdata('user_details')[0]->user_type === 'admin'):?>
                 <li class="<?=($this->router->method==="userTable")?"active":"not-active"?>"> 
                   <a href="<?php echo base_url();?>user/userTable"> <i class="fa fa-users"></i> <span>Users</span></a>
                 </li>
@@ -168,12 +168,6 @@
                 </li>
                 <li class="<?=($this->router->class==="about")?"active":"not-active"?>">
                   <a href="<?php echo base_url("about"); ?>"><i class="fa fa-info-circle"></i> <span>About Us</span></a>
-                </li>
-                
-                <?php $stat = $this->User_model->is_registered($this->session->userdata('user_details')[0]->users_id);                 
-                elseif($stat->num_rows() === 0):?>
-                <li class="<?=($this->router->method==="registrasi")?"active":"not-active"?>"> 
-                  <a href="<?php echo base_url('user/registrasi');?>"> <i class="fa fa-credit-card"></i> <span>Registrasi Rekening</span></a>
                 </li>
                 <?php endif;?>                
               </ul>

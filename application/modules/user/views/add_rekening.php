@@ -1147,9 +1147,8 @@
                                         text:   "Terima kasih data anda telah berhasil di proses, mohon cek email anda untuk update status registrasi anda",
                                         icon:   "success",
 									});
-									
 									setTimeout(function(){
-										window.location.href = '<?php echo base_url(); ?>user/profile';
+										window.location.href = '<?php echo base_url(); ?>trx/overview';
 									}, 5000);
                                 },
                              error: function() {

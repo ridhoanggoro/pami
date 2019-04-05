@@ -4,15 +4,8 @@
   <div class="col-md-12 form f-label">
   <?php if($this->session->flashdata("messagePr")){?>
     <div class="alert alert-info">      
-      <?php echo $this->session->flashdata("messagePr")?>
+      <?php echo $this->session->flashdata("messagePr")?> 
     </div>
-  <?php } ?>
-  <?php if(isset($registrasi_info)) { ?>
-    <div class="alert alert-info alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <h4><i class="icon fa fa-info"></i> Registrasi Sedang Di Review!</h4>
-      <?php echo $registrasi_info; ?>
-    </div>  
   <?php } ?>
     <!-- Profile Image -->
     <div class="box box-success pad-profile">

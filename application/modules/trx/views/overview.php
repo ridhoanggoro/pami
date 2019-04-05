@@ -5,6 +5,13 @@
       <?php echo $this->session->flashdata("messagePr")?>
     </div>
   	<?php } ?>
+		<?php if(isset($registrasi_info)) { ?>
+    <div class="alert alert-info alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <h4><i class="icon fa fa-info"></i> Registrasi Sedang Di Review!</h4>
+      <?php echo $registrasi_info; ?>
+    </div>  
+  <?php } ?>
         <div class="row">
           <div class="col-xs-12">
           	<div class="box box-success">
@@ -46,7 +53,7 @@
 						<p>Jangan takut, kami akan membantumu.</p>
 						</div>
 						<div class="icon">
-						<i class="fa fa-random"></i>
+						<i class="fa fa-question-circle"></i>
 						</div>
 						<a href="#" class="small-box-footer">
 						Buka Rekening Sekarang <i class="fa fa-arrow-circle-right"></i>
@@ -64,7 +71,7 @@
 						<div class="icon">
 						<i class="fa fa-tasks"></i>
 						</div>
-						<a href="#" class="small-box-footer">
+						<a href="<?php echo base_url('trx/product_list');?>" class="small-box-footer">
 						Pilih Produk <i class="fa fa-arrow-circle-right"></i>
 						</a>
 					</div>
@@ -90,7 +97,7 @@
 						<div class="icon">
 						<i class="fa fa-line-chart"></i>
 						</div>
-						<a href="#" class="small-box-footer">
+						<a href="<?php echo base_url('trx/product_list');?>" class="small-box-footer">
 						Pilih Produk <i class="fa fa-arrow-circle-right"></i>
 						</a>
 					</div>

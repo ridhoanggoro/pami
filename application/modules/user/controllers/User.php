@@ -14,7 +14,7 @@ class User extends CI_Controller {
       */
     public function index() {
     	if(is_login()){
-    		redirect( base_url().'user/dashboard_user', 'refresh');
+    		redirect( base_url().'trx/overview', 'refresh');
     	} 
     }
 
@@ -24,7 +24,7 @@ class User extends CI_Controller {
       */
     public function login(){
     	if(isset($_SESSION['user_details'])){
-    		redirect( base_url().'user/dashboard_user', 'refresh');
+    		redirect( base_url().'trx/overview', 'refresh');
     	}   
     	//$this->load->view('include/script');
         $this->load->view('login'); 
@@ -78,9 +78,15 @@ class User extends CI_Controller {
 				$this->session->set_flashdata('messagePr', 'This accout is not varified. Please contact to your admin..');
                 redirect( base_url().'user/login', 'refresh');
 			} else {
-				$this->session->set_userdata('user_details',$return);
-			}
-            redirect( base_url().'user/profile', 'refresh');
+                $this->session->set_userdata('user_details',$return);
+            }
+            
+            if($return[0]->user_type =='Member')
+            {
+                redirect( base_url().'trx/overview', 'refresh');
+            } else {
+                redirect( base_url().'user/profile', 'refresh');
+            }
         }
     }
 
@@ -268,10 +274,6 @@ class User extends CI_Controller {
         $reg_count          = $this->User_model->get_registration_status('ALL');
         $data['reg_stat']   = $reg_count->num_rows();        
         $data['user_data']  = $this->User_model->get_users($id);
-        $reg_stat = $this->User_model->get_registration_status($id);
-        if ($reg_stat->num_rows() > 0) {
-            $data['registrasi_info'] = 'Anda sudah melakukan registrasi rekening, saat ini sedang dalam proses verifikasi';
-        }
         $this->load->view('include/header', $data); 
         $this->load->view('profile', $data);
         $this->load->view('include/footer');

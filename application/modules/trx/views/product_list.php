@@ -18,18 +18,37 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">           
-            <table id="example1" class="cell-border example1 table table-striped table1 delSelTable">
+            <table id="example1" class="table table-hover">
               <thead>
                 <tr>
-                  <th><input type="checkbox" class="selAll"></th>
+                  <th></th>
                   <th>Product Code</th>
-                    <th>Product Name</th>
-                    <th>Type</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Nama Produk </th>
+                  <th>Jenis Produk</th>
+                  <th>Tingkat Resiko</th>
+                  <th>Kinerja 1 Tahun</th>
+                  <th>Total Dana Kelolaan</th>
+                  <th></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="tampil_data">
+              <tr>
+              <?php foreach ($product_details->result() as $row) {
+                ?>
+              
+                <td><img class="img-circle img-bordered-sm" width= "60px" src="<?php echo base_url();?>/assets/images/<?php echo $row->logo; ?>" alt="Product Image"></td>
+                <td><?php echo $row->product_id; ?></td>
+                <td><?php echo $row->name; ?></td>
+                <td><?php echo $row->type; ?></td>
+                <td><?php if($row->risk_level=='Rendah') { echo '<span class="label label-success">'.$row->risk_level.'</span>'; } else {
+                  echo '<span class="label label-danger">'.$row->risk_level.'</span>';
+                }?>
+                </td>
+                <td><?php echo $row->performance.'%'; ?></td>
+                <td><?php echo $row->total_asset; ?></td>
+                <td><a class="btn btn-app item_beli" data-product_id="<?php echo $row->product_id; ?>" data-product_name="<?php echo $row->name; ?>" data-logo="<?php echo $row->logo; ?>"><i class="fa fa-inbox"></i> Beli Produk Ini</a></td>
+              </tr>
+              <?php } ?>
               </tbody> 
             </table>
           </div>
@@ -43,51 +62,102 @@
   </section>
   <!-- /.content -->
 </div>  
-<!-- Modal Crud Start-->
-<div class="modal fade" id="nameModal_product" role="dialog">
-  <div class="modal-dialog">
-    <div class="box box-primary popup" >
-      <div class="box-header with-border formsize">
-        <h3 class="box-title">Product Form</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-      </div>
-      <!-- /.box-header -->
-      <div class="modal-body" style="padding: 0px 0px 0px 0px;"></div>
-    </div>
-  </div>
-</div><!--End Modal Crud --> 
-<script type="text/javascript">
-  $(document).ready(function() {  
-    var url = '<?php echo base_url();?>';
-    var table = $('#example1').DataTable({ 
-          dom: 'lfBrtip',
-          buttons: [
-              'copy', 'excel', 'pdf', 'print'
-          ],
-          "processing": true,
-          "serverSide": true,
-          "ajax": url+"trx/dataTable",
-          "sPaginationType": "full_numbers",
-          "language": {
-            "search": "_INPUT_", 
-            "searchPlaceholder": "Search",
-            "paginate": {
-                "next": '<i class="fa fa-angle-right"></i>',
-                "previous": '<i class="fa fa-angle-left"></i>',
-                "first": '<i class="fa fa-angle-double-left"></i>',
-                "last": '<i class="fa fa-angle-double-right"></i>'
-            }
-          }, 
-          "iDisplayLength": 10,
-          "aLengthMenu": [[10, 25, 50, 100,500,-1], [10, 25, 50,100,500,"All"]]
-      });
-    
-    setTimeout(function() {
-      var add_width = $('.dataTables_filter').width()+$('.box-body .dt-buttons').width()+10;
-      $('.table-date-range').css('right',add_width+'px');
 
-        $('.dataTables_info').before('<button data-base-url="<?php echo base_url().'product/delete/'; ?>" rel="delSelTable" class="btn btn-default btn-sm delSelected pull-left btn-blk-del"> <i class="fa fa-trash"></i> </button><br><br>');  
-    }, 300);
-    $("button.closeTest, button.close").on("click", function (){});
-  });
-</script>            
+<!-- Modal -->
+<div class="modal fade" id="Modal_beli" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                Masukkan Nilai Pembelian
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">                
+                <form class="form" role="form">
+                <label>Anda Akan melakukan pembelian produk</label>
+                <div class="user-block c1">
+
+                    <img class="img-circle img-bordered-sm" src="<?php echo base_url();?>/assets/images/product.png" alt="User Image">
+                        <span class="username">
+                        <a href="#">text</a>
+                        </span>
+                    <span class="description">desc...</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Masukkan jumlah yang ingin anda beli</label>
+                    <div class="input-group">
+                      <span class="input-group-addon">Rp</span>
+                      <input type="number" id="pembelian" name="pembelian" class="form-control" placeholder="Masukkan angka pembelian">
+                    </div>                
+                  </div>                        
+                </form>
+              </div>
+              <input type="hidden" class="form-control" id="user_type" name="user_type" value="<?php echo $this->session->userdata ('user_details')[0]->user_type; ?>"/>
+              <input type="hidden" class="form-control" id="email_edit" name="email_edit"/>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" type="submit" id="btn_update" class="btn btn-primary">Proses</button>
+            </div>
+        </div>
+    </div>
+</div>      
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        //get data for selected record
+        $('#tampil_data').on('click','.item_beli',function(){
+            var product_id          = $(this).data('product_id');          
+            var product_name        = $(this).data('product_name');
+            var product_pict        = $(this).data('logo');
+             
+            $div = $('.c1');
+            $h4 = $div.find('a');
+            $h4.text(product_name);
+
+            $('#Modal_beli').modal('show');
+            
+            $('[name="e_ktp_no_edit"]').val(no_ektp);       
+            $('#profil_image').attr('src',"<?php echo site_url('/assets/images/') ?>" + product_pic);           
+        });
+
+        //update record to database
+         $('#btn_update').on('click',function(){
+            var seq_id         = $('#seq_id').val();
+            var nama           = $('#nama_edit').val();
+            var e_ktp          = $('#e_ktp_no_edit').val();
+            var dob            = $('#ttl_edit').val();
+            var alamat         = $('#alamat_edit').val();
+            var email          = $('#email_edit').val();
+
+            $.ajax({
+                type : "POST",
+                url  : "<?php echo site_url('user/approve_update')?>",
+                dataType : "JSON",
+                data : {seq_id:seq_id, e_ktp:e_ktp, dob:dob, alamat:alamat, email:email},
+                success: function(data){
+                    $('#Modal_beli').modal('hide');
+                    swal({
+                      title:  "Berhasil!",
+                      text:   "Pembelian sukses",
+                      icon:   "success",
+                    });
+                    
+                }
+            });
+            show_data()
+            return false;
+        });
+ 
+    });
+ 
+</script>
