@@ -197,4 +197,23 @@ class User_model extends CI_Model {
 		}  
 	}
 
+	/**
+      * This function is pull data member already approved KYC 
+	  */
+	function get_user_approved()
+	{
+		$response = array();
+		$cmd 	  = "SELECT a.users_id, b.name, '' AS SID,'' AS Investor_Fund_Unit_Acc_No FROM `user_account_info` a INNER JOIN users b ON a.users_id=b.users_id WHERE account_status=2";
+		$response = $this->db->query($cmd)->result_array();
+	
+		return $response;
+	}
+
+	function update($data, $key)
+	{
+		//$this->db->where('users_id', $key);
+		//return $this->db->update('user_account_info', "users_id = 3");
+		return $this->db->update('user_account_info', $data, "users_id = 3");
+	}
+
 }

@@ -4,7 +4,7 @@ class User extends CI_Controller {
 
     function __construct() {
         parent::__construct(); 
-		$this->load->model('User_model');
+        $this->load->model('User_model');
 		$this->user_id = isset($this->session->get_userdata()['user_details'][0]->id)?$this->session->get_userdata()['user_details'][0]->users_id:'1';
     }
 
@@ -877,5 +877,46 @@ class User extends CI_Controller {
             {  
                 echo '<label class="text-success"><span class="glyphicon glyphicon-ok"></span> ID KTP Available</label>';  
             } 
+    }
+
+    public function export_csv()
+    {
+        // file name 
+        $filename = 'users_'.date('Ymd').'.csv'; 
+        header("Content-Description: File Transfer"); 
+        header("Content-Disposition: attachment; filename=$filename"); 
+        header("Content-Type: application/csv; ");
+        
+        // get data 
+        $usersData = $this->User_model->get_user_approved();
+
+        // file creation 
+        $file = fopen('php://output', 'w');
+        
+        $header = array("SA Code","SA Name","SID","Investor Fund Unit A/C No."); 
+        fputcsv($file, $header);
+        foreach ($usersData as $key=>$line){ 
+            fputcsv($file,$line); 
+        }
+        fclose($file); 
+        exit; 
+    }
+
+    function import_csv()
+    {
+        $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
+        foreach($file_data as $row)
+        {
+            //$key = $row["SID"];
+            $key = '3';
+            $data = array(
+                'ifua_no'            => '1234567788XXXX',
+                'account_status'     => '3',
+                'update_user'        => $this->session->userdata('user_details')[0]->name,
+                'update_date'        => date("Y-m-d H:i:s")
+            );
+            $this->User_model->update($data, $key);
+        }
+        
     }
 }
