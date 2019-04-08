@@ -9,7 +9,7 @@
       <div class="col-xs-12">
         <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">New Member Registration List</h3>
+          <h3 class="box-title">Member Approved List</h3>
           <div class="box-tools">
             <a href="<?php echo base_url("user/export_csv"); ?>" class="btn-sm btn btn-success" data-toggle="modal"><i class="fa fa-download"></i> Download Approved Member CSV</a>
             <button type="button" id="btnUploadCsv" class="btn-sm  btn btn-success modalButtonUser" data-toggle="modal"><i class="fa fa-upload"></i> Upload From SINVEST CSV</button>

@@ -794,6 +794,21 @@ class User extends CI_Controller {
     }
 
     /**
+     * This function is Showing approved users by manager
+     * @return Void
+     */
+    public function approved_list($id='') {   
+        is_login();
+        if(!isset($id) || $id == '') {
+            $id = $this->session->userdata ('user_details')[0]->users_id;
+        }
+        $reg_count          = $this->User_model->get_registration_status('APP');
+        $this->load->view('include/header'); 
+        $this->load->view('member_approved_list', $data);
+        $this->load->view('include/footer');
+    }
+
+    /**
      * This function is to get raw data new users registered
      * @return Void
      */

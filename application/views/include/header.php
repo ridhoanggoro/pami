@@ -166,6 +166,9 @@
                 <li class="<?=($this->router->class==="registered_list")?"active":"not-active"?>">
                   <a href="<?php echo base_url("user/registered_list"); ?>"><i class="fa fa-user-plus"></i><span>Member Register List</span></a>
                 </li>
+                <li class="<?=($this->router->class==="approved_list")?"active":"not-active"?>">
+                  <a href="<?php echo base_url("user/approved_list"); ?>"><i class="fa fa-calendar-check-o"></i><span>Member Approve List</span></a>
+                </li>
                 <li class="<?=($this->router->class==="about")?"active":"not-active"?>">
                   <a href="<?php echo base_url("about"); ?>"><i class="fa fa-info-circle"></i> <span>About Us</span></a>
                 </li>
