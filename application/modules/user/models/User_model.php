@@ -211,9 +211,9 @@ class User_model extends CI_Model {
 
 	function update($data, $key)
 	{
-		//$this->db->where('users_id', $key);
+		$this->db->where('users_id', $key);
 		//return $this->db->update('user_account_info', "users_id = 3");
-		return $this->db->update('user_account_info', $data, "users_id = 3");
+		return $this->db->update('user_account_info', $data);
 	}
 
 }

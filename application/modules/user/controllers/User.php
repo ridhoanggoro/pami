@@ -907,10 +907,10 @@ class User extends CI_Controller {
         $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
         foreach($file_data as $row)
         {
-            //$key = $row["SID"];
-            $key = '3';
+            $key = $row["SID"];
+            //$key = '3';
             $data = array(
-                'ifua_no'            => '1234567788XXXX',
+                'ifua_no'            => $row["Investor Fund Unit A/C No."],
                 'account_status'     => '3',
                 'update_user'        => $this->session->userdata('user_details')[0]->name,
                 'update_date'        => date("Y-m-d H:i:s")

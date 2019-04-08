@@ -11,8 +11,8 @@
         <div class="box-header with-border">
           <h3 class="box-title">New Member Registration List</h3>
           <div class="box-tools">
-            <a href="<?php echo base_url("user/export_csv"); ?>" class="btn-sm btn btn-success" data-toggle="modal"><i class="fa fa-download"></i> Download CSV</a>
-            <button type="button" id="btnUploadCsv" class="btn-sm  btn btn-success modalButtonUser" data-toggle="modal"><i class="fa fa-upload"></i> Upload CSV</button>
+            <a href="<?php echo base_url("user/export_csv"); ?>" class="btn-sm btn btn-success" data-toggle="modal"><i class="fa fa-download"></i> Download Approved Member CSV</a>
+            <button type="button" id="btnUploadCsv" class="btn-sm  btn btn-success modalButtonUser" data-toggle="modal"><i class="fa fa-upload"></i> Upload From SINVEST CSV</button>
           </div>
         </div>
         <!-- /.box-header -->
@@ -22,6 +22,7 @@
               <tr>
                   <th>No. ID</th>
                   <th>Nama</th>
+                  <th>IFUA No</th>
                   <th>No E-KTP</th>
                   <th>TTL</th>
                   <th>No. Rekening</th>
@@ -130,13 +131,14 @@
             <div class="form-group">
               <label>Select CSV File</label>
               <input type="file" name="csv_file" id="csv_file" required accept=".csv" />
-            </div>
-            </form> 
+            </div>             
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer">
-                <button type="submit" name="import_csv_btn" class="btn btn-info" id="import_csv_btn">Proses Upload</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" name="import_csv" class="btn btn-info" id="import_csv_btn">Proses Upload</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -163,6 +165,7 @@
                                 '<td>' + data[i].seq_id + '</td>' +
                                 '<td>' + data[i].name + '</td>' +
                                 '<td>' + data[i].e_ktp_no + '</td>' +
+                                '<td>' + data[i].ifua_no + '</td>' +
                                 '<td>' + data[i].tanggal_lahir + '</td>' +
                                 '<td>' + data[i].rekening_bank_no + '</td>' +
                                 '<td><span class="label label-success">Pending Manager Approval</span></td>' +
@@ -176,6 +179,7 @@
                             html += '<tr>' +
                                 '<td>' + data[i].seq_id + '</td>' +
                                 '<td>' + data[i].name + '</td>' +
+                                '<td>' + data[i].ifua_no + '</td>' +
                                 '<td>' + data[i].e_ktp_no + '</td>' +
                                 '<td>' + data[i].tanggal_lahir + '</td>' +
                                 '<td>' + data[i].rekening_bank_no + '</td>' +
@@ -213,8 +217,8 @@
                     $('#import_csv')[0].reset();
                     $('#import_csv_btn').attr('disabled', false);
                     $('#import_csv_btn').html('Import Done');
-                    // $('#Modal_Upload').modal('hide');
-                    // show_data();
+                    $('#Modal_Upload').modal('hide');
+                    show_data();
                 }
             })
         });
