@@ -202,7 +202,15 @@ class User_model extends CI_Model {
 	}
 
 	/**
-      * This function is pull data member already approved KYC 
+	  * This function is pull data member already approved KYC 
+	  * Member status definition
+	  * 0 = New Registered Member
+	  * 1 = Approved by Admin
+	  * 2 = Approved by Manager
+	  * 3 = Member Active (Have IFUA No)
+	  * 8 = Rejected By Admin
+	  * 9 = Rejected By Manager
+	  * 7 = Inactive Member
 	  */
 	function get_user_approved()
 	{
@@ -215,8 +223,7 @@ class User_model extends CI_Model {
 
 	function update($data, $key)
 	{
-		$this->db->where('users_id', $key);
-		//return $this->db->update('user_account_info', "users_id = 3");
+		$this->db->where('users_id', $key);		
 		return $this->db->update('user_account_info', $data);
 	}
 
