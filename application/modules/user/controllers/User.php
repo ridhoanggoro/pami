@@ -917,7 +917,7 @@ class User extends CI_Controller {
         exit; 
     }
 
-    function import_csv()
+    public function import_csv()
     {
         $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
         foreach($file_data as $row)

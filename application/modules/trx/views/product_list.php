@@ -36,7 +36,7 @@
               <?php foreach ($product_details->result() as $row) {
                 ?>
               
-                <td><img class="img-circle img-bordered-sm" width= "60px" src="<?php echo base_url();?>/assets/images/<?php echo $row->logo; ?>" alt="Product Image"></td>
+                <td><img class="img-circle img-bordered-sm" width= "60px" src="<?php echo base_url();?>assets/images/<?php echo $row->logo; ?>" alt="Product Image"></td>
                 <td><?php echo $row->product_id; ?></td>
                 <td><?php echo $row->name; ?></td>
                 <td><?php echo $row->type; ?></td>
@@ -46,7 +46,10 @@
                 </td>
                 <td><?php echo $row->performance.'%'; ?></td>
                 <td><?php echo $row->total_asset; ?></td>
-                <td><a class="btn btn-app item_beli" data-product_id="<?php echo $row->product_id; ?>" data-product_name="<?php echo $row->name; ?>" data-logo="<?php echo $row->logo; ?>"><i class="fa fa-inbox"></i> Beli Produk Ini</a></td>
+                <td><?php if($registrasi_info == 1) : ?>
+                <a class="btn btn-app item_beli" data-product_id="<?php echo $row->product_id; ?>" data-product_name="<?php echo $row->name; ?>" data-logo="<?php echo $row->logo; ?>"><i class="fa fa-inbox"></i> Beli Produk Ini</a>
+                <?php endif ; ?>
+                </td>
               </tr>
               <?php } ?>
               </tbody> 
@@ -85,7 +88,6 @@
                 <form class="form" role="form">
                 <label>Anda Akan melakukan pembelian produk</label>
                 <div class="user-block c1">
-
                     <img class="img-circle img-bordered-sm" src="<?php echo base_url();?>/assets/images/product.png" alt="User Image">
                         <span class="username">
                         <a href="#">text</a>

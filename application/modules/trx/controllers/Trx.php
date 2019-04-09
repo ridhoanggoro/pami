@@ -32,7 +32,7 @@ class Trx extends CI_Controller {
             $id = $this->session->userdata ('user_details')[0]->users_id;
         }
         $reg_stat = $this->Trx_model->get_registration_status($id);
-        if ($reg_stat->num_rows() > 0) {
+        if ($reg_stat->num_rows() == 0) {
             $data['registrasi_info'] = 'Anda sudah melakukan registrasi rekening, saat ini sedang dalam proses verifikasi';
         }
         $data['user_data'] = '';
@@ -42,8 +42,12 @@ class Trx extends CI_Controller {
     }
 
     public function product_list($id='')
-    {
-        $data['user_data'] = '';
+    {        
+        if(!isset($id) || $id == '') {
+            $id = $this->session->userdata ('user_details')[0]->users_id;
+        }
+        $reg_stat = $this->Trx_model->get_registration_status($id);        
+        $data['registrasi_info']   = $reg_stat->num_rows();
         $data['product_details']   = $this->Trx_model->get_product();
         $this->load->view('include/header'); 
         $this->load->view('product_list', $data);

@@ -34,7 +34,7 @@ class Trx_model extends CI_Model {
   			}
   			  
 		} else {
-			$param = array('user_account_info.users_id' => $id, 'user_account_info.account_status !=' => 2); 
+			$param = array('user_account_info.users_id' => $id, 'user_account_info.account_status =' => 3); 
 		}
   				
 		$this->db->select('*');
