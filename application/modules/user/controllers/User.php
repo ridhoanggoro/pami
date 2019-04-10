@@ -881,6 +881,62 @@ class User extends CI_Controller {
         echo json_encode($reVal);
     }
 
+    public function reject_approve(){
+
+        $userid         = $this->session->userdata ('user_details')[0]->name;
+        $email_address  = $this->input->post('email');
+  		$role 	        = $this->session->userdata ('user_details')[0]->user_type;
+  		$seq_id         = $this->input->post('seq_id');
+       	
+       	if (strtoupper($role )=='ADMIN') {               
+               $reg_status = 'Ditolak oleh Admin, Silahkan melakukan registrasi ulang';
+       	} else if (strtoupper($role )=='MANAGER') {              
+               $reg_status = 'Ditolak, Silahkan melakukan registrasi ulang';
+       	}              
+
+        $reVal = $this->User_model->members_reject($seq_id);
+
+        // $setting = settings();
+        // $body = $this->User_model->get_template('approve_reject');
+        // $data = array(
+        //     'user_name' => $username,
+        //     'e_ktp' => $this->input->post('e_ktp'),
+        //     'ttl' => $this->input->post('dob'),
+        //     'alamat' => $this->input->post('alamat'),
+        //     'sender_name' => $setting['company_name'],
+        //     'website_name' => $setting['company_name'],
+        //     'status' => $reg_status
+        //     );
+        // $body = $body->html;
+        // foreach ($data as $key => $value) {
+        //     $body = str_replace('{var_'.$key.'}', $value, $body);
+        // } 
+
+        // $config = Array(        
+        //     'protocol' => $setting['mail_setting'],
+        //     'smtp_host' => $setting['HOST'],
+        //     'smtp_port' => $setting['SMTP_SECURE'],
+        //     'smtp_user' => $setting['SMTP_EMAIL'],
+        //     'smtp_pass' => $setting['SMTP_PASSWORD'],
+        //     'smtp_timeout' => '4',
+        //     'mailtype'  => 'html', 
+        //     'charset'   => 'iso-8859-1'
+        // );
+
+        // $this->load->library('email', $config);
+        // $this->email->set_newline("\r\n");
+
+        // $this->email->to($email_address);
+        // $this->email->from($setting['SMTP_EMAIL'],$setting['company_name']);
+        // $this->email->subject('Informasi Status Pembukaan Rekening - Ditolak');
+
+        // $this->email->message($body);  
+        // $this->email->set_mailtype('html'); 
+        // $this->email->send();
+
+        echo json_encode($reVal);
+    }
+
     public function check_exists()
     {
         $ktp_id = $this->input->post('ktp_no');
