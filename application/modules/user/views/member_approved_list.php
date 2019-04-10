@@ -11,8 +11,8 @@
         <div class="box-header with-border">
           <h3 class="box-title">Member Approved List</h3>
           <div class="box-tools">
-            <a href="<?php echo base_url("user/export_csv"); ?>" class="btn-sm btn btn-success" data-toggle="modal"><i class="fa fa-download"></i> Download Approved Member CSV</a>
-            <button type="button" id="btnUploadCsv" class="btn-sm  btn btn-success modalButtonUser" data-toggle="modal"><i class="fa fa-upload"></i> Upload From SINVEST CSV</button>
+            <a href="<?php echo base_url("user/export_csv"); ?>" class="btn-sm btn btn-success" data-toggle="tooltip" data-placement="top" title="Download CSV Data"><i class="fa fa-download"></i> Download Approved Member CSV</a>
+            <button type="button" id="btnUploadCsv" class="btn-sm  btn btn-success modalButtonUser" data-toggle="tooltip" data-placement="top" title="Upload CSV Data"><i class="fa fa-upload"></i> Upload From SINVEST CSV</button>
           </div>
         </div>
         <!-- /.box-header -->
@@ -27,7 +27,7 @@
                   <th>TTL</th>
                   <th>No. Rekening</th>
                   <th>Status</th>
-                  <th style="text-align: right;">Action</th>
+                  <th style="text-align: right;"></th>
               </tr>
             </thead>
             <tbody id="tampil_data">
@@ -169,9 +169,9 @@
                             '<td>' + data[i].e_ktp_no + '</td>' +
                             '<td>' + data[i].tanggal_lahir + '</td>' +
                             '<td>' + data[i].rekening_bank_no + '</td>' +
-                            '<td>' + data[i].account_status + '</td>' +
+                            '<td>' + data[i].member_status + '</td>' +
                             '<td style="text-align:right;">' +
-                            '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="' + data[i].seq_id + '" data-nama="' + data[i].name + '" data-e_ktp_no="' + data[i].e_ktp_no + '"data-tanggal_lahir="' + data[i].tanggal_lahir + '"data-rekening_bank_no="' + data[i].rekening_bank_no + '"data-profile_pic="' + data[i].profile_pic + '"data-alamat="' + data[i].alamat + '"data-email="' + data[i].email + '"><i class="fa fa-search"></i></a>' +
+                            '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" data-toggle="tooltip" data-placement="top" title="lihat detail" data-seq_id="' + data[i].seq_id + '" data-nama="' + data[i].name + '" data-e_ktp_no="' + data[i].e_ktp_no + '"data-tanggal_lahir="' + data[i].tanggal_lahir + '"data-rekening_bank_no="' + data[i].rekening_bank_no + '"data-profile_pic="' + data[i].profile_pic + '"data-alamat="' + data[i].alamat + '"data-email="' + data[i].email + '"><i class="fa fa-search"></i></a>' +
                             '</td>' +
                             '</tr>';
                         }                    
