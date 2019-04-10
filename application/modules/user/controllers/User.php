@@ -812,7 +812,7 @@ class User extends CI_Controller {
      * This function is to get raw data new users registered
      * @return Void
      */
-    public function get_acc_registered_list(){
+    public function get_acc_registered_list(){        
         $data = $this->User_model->get_registration_status('ALL');
         echo json_encode($data->result());
     }
