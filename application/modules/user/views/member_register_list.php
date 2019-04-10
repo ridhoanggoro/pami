@@ -10,9 +10,7 @@
         <div class="box box-success">
         <div class="box-header with-border">
           <h3 class="box-title">New Member Registration List</h3>
-          <div class="box-tools">
-            <a href="<?php echo base_url("user/export_csv"); ?>" class="btn-sm btn btn-success" data-toggle="modal"><i class="fa fa-download"></i> Download Approved Member CSV</a>
-            <button type="button" id="btnUploadCsv" class="btn-sm  btn btn-success modalButtonUser" data-toggle="modal"><i class="fa fa-upload"></i> Upload From SINVEST CSV</button>
+          <div class="box-tools">            
           </div>
         </div>
         <!-- /.box-header -->
@@ -102,43 +100,9 @@
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" type="submit" id="btn_reject" class="btn btn-danger">Reject User</button>
                 <button type="button" type="submit" id="btn_update" class="btn btn-primary">Approve User</button>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Upload CSV -->
-<div class="modal fade" id="Modal_Upload" tabindex="-1" role="dialog" 
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                Upload CSV File From SINVEST
-                </h4>
-            </div>
-            
-            <!-- Modal Body -->
-            <div class="modal-body">
-            <form method="post" id="import_csv" enctype="multipart/form-data">
-            <div class="form-group">
-              <label>Select CSV File</label>
-              <input type="file" name="csv_file" id="csv_file" required accept=".csv" />
-            </div>             
-            </div>
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" name="import_csv" class="btn btn-info" id="import_csv_btn">Proses Upload</button>
-            </div>
-            </form>
         </div>
     </div>
 </div>
@@ -193,35 +157,7 @@
                     $('#tampil_data').html(html);
                 }
             });
-        }
-
-        //Open upload PopUp
-        $('#btnUploadCsv').on('click', function() {
-            $('#Modal_Upload').modal('show');
-        });
-
-        // start import
-        $('#import_csv').on('submit', function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: "<?php echo base_url(); ?>user/import_csv",
-                method: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#import_csv_btn').html('Importing...');
-                },
-                success: function(data) {
-                    $('#import_csv')[0].reset();
-                    $('#import_csv_btn').attr('disabled', false);
-                    $('#import_csv_btn').html('Import Done');
-                    //$('#Modal_Upload').modal('hide');
-                    show_data();
-                }
-            })
-        });
+        }       
         
         //get data for selected record
         $('#tampil_data').on('click', '.item_edit', function() {
@@ -277,6 +213,25 @@
             return false;
         });
 
+        //update record to database
+        $('#btn_reject').on('click', function() {
+            swal({
+                title: "Anda yakin?",
+                text: "Setelah ditolak, member tersebut akan memulai registrasi ulang!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("Registrasi member telah di tolak!", {
+                    icon: "success",
+                    });
+                } else {
+                    swal("Penolakan dibatalkan!");
+                }
+            });
+        });
     });
 
 </script>
