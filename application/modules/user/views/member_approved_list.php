@@ -26,7 +26,7 @@
                   <th>No E-KTP</th>
                   <th>TTL</th>
                   <th>No. Rekening</th>
-                  <th>Info</th>
+                  <th>Status</th>
                   <th style="text-align: right;">Action</th>
               </tr>
             </thead>
@@ -151,45 +151,30 @@
         //function show all product
         function show_data() {
             var role = $('#user_type').val();
+            var obj = 'APP';
             $.ajax({
-                type: 'ajax',
+                type: 'post',
                 url: '<?php echo site_url('user/get_acc_registered_list')?>',
                 async: false,
                 dataType: 'json',
+                data : {obj:obj},
                 success: function(data) {
                     var html = '';
-                    var i;
-                    if (role == 'Manager') {
-                        for (i = 0; i < data.length; i++) {
-                            html += '<tr>' +
-                                '<td>' + data[i].seq_id + '</td>' +
-                                '<td>' + data[i].name + '</td>' +
-                                '<td>' + data[i].e_ktp_no + '</td>' +
-                                '<td>' + data[i].ifua_no + '</td>' +
-                                '<td>' + data[i].tanggal_lahir + '</td>' +
-                                '<td>' + data[i].rekening_bank_no + '</td>' +
-                                '<td><span class="label label-success">Pending Manager Approval</span></td>' +
-                                '<td style="text-align:right;">' +
-                                '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="' + data[i].seq_id + '" data-nama="' + data[i].name + '" data-e_ktp_no="' + data[i].e_ktp_no + '"data-tanggal_lahir="' + data[i].tanggal_lahir + '"data-rekening_bank_no="' + data[i].rekening_bank_no + '"data-profile_pic="' + data[i].profile_pic + '"data-alamat="' + data[i].alamat + '"data-email="' + data[i].email + '"><i class="fa fa-search"></i></a>' +
-                                '</td>' +
-                                '</tr>';
-                        }
-                    } else {
-                        for (i = 0; i < data.length; i++) {
-                            html += '<tr>' +
-                                '<td>' + data[i].seq_id + '</td>' +
-                                '<td>' + data[i].name + '</td>' +
-                                '<td>' + data[i].ifua_no + '</td>' +
-                                '<td>' + data[i].e_ktp_no + '</td>' +
-                                '<td>' + data[i].tanggal_lahir + '</td>' +
-                                '<td>' + data[i].rekening_bank_no + '</td>' +
-                                '<td><span class="label label-warning">Pending Admin Approval</span></td>' +
-                                '<td style="text-align:right;">' +
-                                '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="' + data[i].seq_id + '" data-nama="' + data[i].name + '" data-e_ktp_no="' + data[i].e_ktp_no + '"data-tanggal_lahir="' + data[i].tanggal_lahir + '"data-rekening_bank_no="' + data[i].rekening_bank_no + '"data-profile_pic="' + data[i].profile_pic + '"data-alamat="' + data[i].alamat + '"data-email="' + data[i].email + '"><i class="fa fa-search"></i></a>' +
-                                '</td>' +
-                                '</tr>';
-                        }
-                    }
+                    var i;                   
+                    for (i = 0; i < data.length; i++) {
+                        html += '<tr>' +
+                            '<td>' + data[i].seq_id + '</td>' +
+                            '<td>' + data[i].name + '</td>' +                            
+                            '<td>' + data[i].ifua_no + '</td>' +
+                            '<td>' + data[i].e_ktp_no + '</td>' +
+                            '<td>' + data[i].tanggal_lahir + '</td>' +
+                            '<td>' + data[i].rekening_bank_no + '</td>' +
+                            '<td>' + data[i].account_status + '</td>' +
+                            '<td style="text-align:right;">' +
+                            '<a href="javascript:void(0);" class="btn btn-info btn-xs item_edit" title="lihat detail" data-seq_id="' + data[i].seq_id + '" data-nama="' + data[i].name + '" data-e_ktp_no="' + data[i].e_ktp_no + '"data-tanggal_lahir="' + data[i].tanggal_lahir + '"data-rekening_bank_no="' + data[i].rekening_bank_no + '"data-profile_pic="' + data[i].profile_pic + '"data-alamat="' + data[i].alamat + '"data-email="' + data[i].email + '"><i class="fa fa-search"></i></a>' +
+                            '</td>' +
+                            '</tr>';
+                        }                    
                     $('#tampil_data').html(html);
                 }
             });
