@@ -233,6 +233,13 @@ class User_model extends CI_Model {
 		return $this->db->update('user_account_info', $data);
 	}
 
-	
+	function members_reject($id)
+	{
+		$sql = "INSERT INTO user_account_info_hist SELECT * FROM user_account_info WHERE users_id='$id'";
+		$response = $this->db->query($sql);
+
+		$response = $this->db->delete('user_account_info', array('users_id' => $id));
+		return $response;
+	}
 
 }
