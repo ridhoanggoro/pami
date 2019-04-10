@@ -148,7 +148,8 @@ class User_model extends CI_Model {
 		if(strtoupper($mode) === 'APP')
 		{			
 			$param = array('user_account_info.account_status >= ' => 2);
-			
+			$sql = "SELECT a.*,b.*, CASE WHEN a.account_status=2 THEN '<span class=\"label label-success\">Manager Approval</span>' WHEN a.account_status=3 THEN '<span class=\"label label-success\">Active Member</span>' ELSE '<span class=\"label label-success\">Unknown Status</span>' END AS member_status FROM `user_account_info` a INNER JOIN users b ON a.users_id=b.users_id WHERE a.account_status >= 2 ";
+			return $this->db->query($sql);
 		} 
 		else { 
 			if (strtoupper($id) === 'ALL') {
@@ -161,15 +162,15 @@ class User_model extends CI_Model {
 			} 			
 			else {
 				$param = array('user_account_info.users_id' => $id, 'user_account_info.account_status !=' => 3); 
-			}
-		}		
+			}				
 
-		$this->db->select('*');
-		$this->db->from('user_account_info');
-		$this->db->join('users', 'user_account_info.users_id=users.users_id');
-		$this->db->where($param);
-  		$query = $this->db->get();
-  		return $query;
+			$this->db->select('*');
+			$this->db->from('user_account_info');
+			$this->db->join('users', 'user_account_info.users_id=users.users_id');
+			$this->db->where($param);
+			$query = $this->db->get();
+		  	return $query;
+		}
 	  }
 	  
 	public function is_registered($id)
@@ -231,5 +232,7 @@ class User_model extends CI_Model {
 		$this->db->where('users_id', $key);		
 		return $this->db->update('user_account_info', $data);
 	}
+
+	
 
 }
