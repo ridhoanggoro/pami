@@ -90,7 +90,7 @@
                   <div class="form-group">
                     <label class="col-sm-3 control-label"  for="alamat_edit" >Alamat</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" id="alamat_edit" name="alamat_edit" placeholder="Alamat"></textarea>
+                        <textarea class="form-control" id="alamat_edit" name="alamat_edit" rows="5" placeholder="Alamat"></textarea>
                     </div>
                   </div>                                    
                 </form>
@@ -215,6 +215,13 @@
 
         //update record to database
         $('#btn_reject').on('click', function() {
+            var seq_id = $('#seq_id').val();
+            var nama = $('#nama_edit').val();
+            var e_ktp = $('#e_ktp_no_edit').val();
+            var dob = $('#ttl_edit').val();
+            var alamat = $('#alamat_edit').val();
+            var email = $('#email_edit').val();
+
             swal({
                 title: "Anda yakin?",
                 text: "Setelah ditolak, member tersebut akan memulai registrasi ulang!",
@@ -224,9 +231,19 @@
                 })
                 .then((willDelete) => {
                 if (willDelete) {
-                    swal("Registrasi member telah di tolak!", {
-                    icon: "success",
+                    $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('user/reject_approve')?>",
+                    dataType: "JSON",
+                    data: { seq_id: seq_id, e_ktp: e_ktp, dob: dob, alamat: alamat, email: email },
+                    success: function(data) {
+                            swal("Registrasi member telah di tolak!", {
+                            icon: "success",
+                            });
+                        }
                     });
+                    show_data()
+                    return false;                    
                 } else {
                     swal("Penolakan dibatalkan!");
                 }
