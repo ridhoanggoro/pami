@@ -143,22 +143,27 @@ class User_model extends CI_Model {
 
   	public function get_registration_status($id='ALL')
   	{
-  		$role 	= $this->session->userdata ('user_details')[0]->user_type;
-  		if (strtoupper($id) === 'ALL') {
-  			if (strtoupper($role )=='ADMIN') {
-  				$param = array('user_account_info.account_status' => 0);
-  			} else {
-  				$param = array('user_account_info.account_status' => 1);
-			}
-			 // $param = array('user_account_info.account_status' > 0);
+		$mode   = $this->input->post('obj');
+		$role 	= $this->session->userdata ('user_details')[0]->user_type;
+		if(strtoupper($mode) === 'APP')
+		{			
+			$param = array('user_account_info.account_status >= ' => 2);
+			
 		} 
-		else if (strtoupper($id) === 'APP') {
-			$param = array('user_account_info.account_status' > 2);
-		}
-		else {
-			$param = array('user_account_info.users_id' => $id, 'user_account_info.account_status !=' => 3); 
-		}
-  				
+		else { 
+			if (strtoupper($id) === 'ALL') {
+				if (strtoupper($role ) === 'ADMIN') {
+					$param = array('user_account_info.account_status' => 0);
+				} else {
+					$param = array('user_account_info.account_status' => 1);
+				}
+				// $param = array('user_account_info.account_status' > 0);
+			} 			
+			else {
+				$param = array('user_account_info.users_id' => $id, 'user_account_info.account_status !=' => 3); 
+			}
+		}		
+
 		$this->db->select('*');
 		$this->db->from('user_account_info');
 		$this->db->join('users', 'user_account_info.users_id=users.users_id');
