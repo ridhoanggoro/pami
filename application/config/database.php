@@ -5,7 +5,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 $hostname ="localhost";
 $username ="root";
-$password ="";
+$password ="MnnwbMgt8CCtBFo3";
 $database ="pami_prod";	
 
 $db['default'] = array(
